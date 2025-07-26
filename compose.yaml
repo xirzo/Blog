@@ -1,0 +1,21 @@
+﻿services:
+  blog:
+    image: blog
+    build:
+      context: .
+      dockerfile: Blog/Dockerfile
+    environment:
+      DB_CONNECTION: "host=localhost port=5432 dbname=groupbotdb user=groupbot password=1234"
+  
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: 1234
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10080:8080
