@@ -1,11 +1,13 @@
 ﻿services:
-  blog:
-    image: blog
+  blog-web:
+    image: blog-web
     build:
       context: .
-      dockerfile: Blog/Dockerfile
+      dockerfile: Blog.Web/Dockerfile
+    ports:
+      - "5000:5000"
     environment:
-      DB_CONNECTION: "host=localhost port=5432 dbname=blogdb user=blogger password=1234"
+      ASPNETCORE_ENVIRONMENT: Development
   
   db:
     image: postgres
