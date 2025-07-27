@@ -4,6 +4,6 @@ namespace Blog.Core.UseCases;
 
 public interface IUserRepository
 {
-    Task<bool> Add(User user);
-    Task<User?> FindById(Guid id);
+    Task<bool> AddAsync(User user);
+    Task<User?> FindByIdAsync(Guid id);
 }
