@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Web.Controllers;
 
+[ApiController]
+[Route("user")]
 public class UserController : ControllerBase
 {
     private readonly IUserRepository _repository;
@@ -36,6 +38,6 @@ public class UserController : ControllerBase
             return NotFound();
         }
 
-        return user;
+        return Ok(user);
     }
 }
