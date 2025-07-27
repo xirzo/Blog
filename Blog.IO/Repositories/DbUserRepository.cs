@@ -7,11 +7,17 @@ namespace Blog.IO.Repositories;
 
 public class DbUserRepository(BlogDbContext context) : IUserRepository
 {
-    public async Task<bool> AddAsync(User user)
+    public async Task<User?> AddAsync(User user)
     {
-        await context.Users.AddAsync(user);
+        var addedUser= await context.Users.AddAsync(user);
         var result = await context.SaveChangesAsync();
-        return result > 0;
+
+        if (result <= 0)
+        {
+            return null;
+        }
+
+        return addedUser.Entity;
     }
 
     public async Task<User?> FindByIdAsync(Guid id)

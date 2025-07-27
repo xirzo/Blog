@@ -5,17 +5,23 @@
       context: .
       dockerfile: Blog/Dockerfile
     environment:
-      DB_CONNECTION: "host=localhost port=5432 dbname=groupbotdb user=groupbot password=1234"
+      DB_CONNECTION: "host=localhost port=5432 dbname=blogdb user=blogger password=1234"
   
   db:
     image: postgres
     restart: always
     shm_size: 128mb
+    ports:
+      - "5432:5432" 
     environment:
       POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: blogger
+      POSTGRES_DB: blogdb
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 10080:8080
+    depends_on:
+      - db

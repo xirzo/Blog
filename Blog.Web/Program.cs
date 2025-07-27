@@ -1,14 +1,22 @@
+using System.Net;
+using Blog.Core.UseCases;
 using Blog.IO.Extensions;
+using Blog.IO.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var dbConnection = Environment.GetEnvironmentVariable("DB_CONNECTION");
+builder.Services.AddDatabase();
+builder.Services.AddControllers();
+builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 
-if (dbConnection == null)
+builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    return;
-}
+    serverOptions.Listen(IPAddress.Any, 5000);
+});
 
-builder.Services.AddDatabase(dbConnection);
 var app = builder.Build();
+
+app.UseAuthorization();
+app.MapControllers();
+
 app.Run();
