@@ -1,3 +1,3 @@
 namespace Blog.Core.Entities;
 
-public record User(Guid Id, string Name, string PasswordHash);
+public record User(Guid Id, string Email, string Name, string PasswordHash);
