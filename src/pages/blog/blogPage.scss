@@ -1,0 +1,17 @@
+@use "../../devices_screen.scss" as *;
+
+.blog-post-holder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  padding: 2em 0;
+  justify-items: center;
+}
+
+@media (max-width: $break-mobile) {
+  .blog-post-holder {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+    padding: 1em 0;
+  }
+}
