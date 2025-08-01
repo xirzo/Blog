@@ -32,14 +32,14 @@ public class AuthController : ControllerBase
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
         var user = new User
-        (
-            Id: Guid.NewGuid(),
-            Name: dto.Name,
-            Email: dto.Email,
-            PasswordHash: passwordHash
-        );
-        
-        await _userRepository.AddAsync(user);
+        { 
+            Id = Guid.NewGuid(),
+            Name = dto.Name,
+            Email = dto.Email,
+            PasswordHash = passwordHash,
+        };
+
+    await _userRepository.AddAsync(user);
 
         return Ok(new { user.Id, user.Name, user.Email });
     }

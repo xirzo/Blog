@@ -13,6 +13,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDatabase();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
+builder.Services.AddScoped<IBlogRepository, DbBlogRepository>();
+builder.Services.AddScoped<IPostRepository, DbPostRepository>();
 
 var allowedOrigin = builder.Configuration["FrontendOrigin"] ?? "http://localhost:3000";
 

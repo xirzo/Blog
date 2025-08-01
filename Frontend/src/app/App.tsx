@@ -11,7 +11,6 @@ function App() {
             <AuthProvider>
                 <div className="app">
                     <Navbar />
-                    
                     <main>
                         <Routes>
                             {publicRoutes.map(({ path, element }) => (
