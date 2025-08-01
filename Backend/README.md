@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-## Setup
-
-Create `.env` file inside project root (where `package.json` is)
-
-```env
-VITE_BACKEND_URL=https://localhost:PORT
-```
-
-=======
 ## Sources
 
 - [Clean Architecture in 3 minutes](https://www.youtube.com/watch?v=MBlHCJtQa9k)
@@ -15,4 +5,3 @@ VITE_BACKEND_URL=https://localhost:PORT
 - [Using Entity Framework with PostgreSQL Database](https://dev.to/hbolajraf/c-using-entity-framework-with-postgresql-database-41dg)
 - [Все, что нужно знать об Entity Framework Core. Связи, миграции, запросы, репозитории
 ](https://www.youtube.com/watch?v=gRQbFRDjS_U)
->>>>>>> BlogBackend/merge/frontend
