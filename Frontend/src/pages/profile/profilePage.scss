@@ -1,0 +1,39 @@
+.profile-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  
+  h1 {
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .profile-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    
+    .profile-info {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+      
+      h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      
+      .email {
+        color: #666;
+        font-size: 1.1rem;
+      }
+      
+      .user-id {
+        color: #999;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
