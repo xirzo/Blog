@@ -7,6 +7,6 @@ export type RegisterPayload = {
 };
 
 export async function register(payload: RegisterPayload) {
-  const res = await api.post("/register", payload);
+  const res = await api.post("/auth/register", payload);
   return res.data;
 }
