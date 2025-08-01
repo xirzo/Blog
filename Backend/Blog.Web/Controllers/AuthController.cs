@@ -34,10 +34,10 @@ public class AuthController : ControllerBase
 
         var user = new User
         (
-            Guid.NewGuid(),
-            dto.Name,
-            dto.Email,
-            passwordHash
+            Id: Guid.NewGuid(),
+            Name: dto.Name,
+            Email: dto.Email,
+            PasswordHash: passwordHash
         );
         
         await _userRepository.AddAsync(user);
@@ -49,12 +49,16 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(LoginDto dto)
     {
         var user = await _userRepository.FindByEmailAsync(dto.Email);
-        
+
         if (user == null)
-            return Unauthorized("Invalid credentials");
+        {
+            return Unauthorized("User not found");
+        }
 
         if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-            return Unauthorized("Invalid credentials");
+        {
+            return Unauthorized("Invalid password");
+        }
 
         var token = GenerateJwtToken(user);
 
