@@ -7,7 +7,7 @@
     ports:
       - "5000:5000"
     environment:
-      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_ENVIRONMENT: Development
   db:
     image: postgres
     restart: always
