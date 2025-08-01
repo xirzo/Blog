@@ -1,8 +1,4 @@
-## TODO
-
-- [] Add compose file for both frontend and backend
-
-## Starting
+## Installation
 
 ### Copy env files and **put values in them**
 
@@ -11,18 +7,9 @@ cp backend.env Backend/.env
 cp frontend.env Frontend/.env
 ```
 
-### Start the backend
+### Start the docker compose
 
 ```sh
-cd Backend
 docker-compose build
 docker-compose up -d
-```
-
-### Start the frontend
-
-```sh
-cd Frontend
-npm install
-npm run dev
 ```

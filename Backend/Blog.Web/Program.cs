@@ -14,7 +14,7 @@ builder.Services.AddDatabase();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 
-var allowedOrigin = builder.Configuration["FrontendOrigin"] ?? "http://localhost:5173";
+var allowedOrigin = builder.Configuration["FrontendOrigin"] ?? "http://localhost:3000";
 
 builder.Services.AddCors(options =>
 {

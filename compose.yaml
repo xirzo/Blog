@@ -1,0 +1,61 @@
+﻿services:
+  blog-backend:
+    image: blog-backend
+    build:
+      context: ./Backend
+      dockerfile: Blog.Web/Dockerfile
+    env_file:
+      - ./Backend/.env
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      - db
+    networks:
+      - blog-network
+      
+  blog-frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - blog-backend
+    env_file:
+      - ./Frontend/.env
+    networks:
+      - blog-network
+
+  db:
+    image: postgres:15
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432" 
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: blogger
+      POSTGRES_DB: blogdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - blog-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10080:8080
+    depends_on:
+      - db
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
