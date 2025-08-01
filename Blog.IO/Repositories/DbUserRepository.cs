@@ -24,4 +24,9 @@ public class DbUserRepository(BlogDbContext context) : IUserRepository
     {
         return await context.Users.FirstOrDefaultAsync(user => user.Id == id);
     }
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await context.Users.FirstOrDefaultAsync(user => user.Email == email);
+    }
 }
