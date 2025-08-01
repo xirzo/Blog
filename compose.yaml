@@ -1,0 +1,29 @@
+﻿services:
+  blog-web:
+    image: blog-web
+    build:
+      context: .
+      dockerfile: Blog.Web/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+  
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432" 
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: blogger
+      POSTGRES_DB: blogdb
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 10080:8080
+    depends_on:
+      - db
