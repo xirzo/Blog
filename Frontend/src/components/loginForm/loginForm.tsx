@@ -8,8 +8,8 @@ export function LoginForm() {
 
   return (
     <form onSubmit={e => { e.preventDefault(); login(email, password); }}>
-        <input value={email} onChange={e => setEmail(e.target.value)} />
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password"/>
         <button type="submit">Login</button>
     </form>
   );
