@@ -14,21 +14,20 @@ namespace Blog.Web.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
-    private readonly IConfiguration _config;
-
-    public AuthController(IConfiguration config, IUserRepository userRepository)
+    public AuthController(IUserRepository userRepository)
     {
-        _config = config;
         _userRepository = userRepository;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
-        var doesExist = await _userRepository.FindByEmailAsync(dto.Email);
-        
-        if (doesExist != null)
+        var existingUser = await _userRepository.FindByEmailAsync(dto.Email);
+
+        if (existingUser != null)
+        {
             return BadRequest("Email already registered");
+        }
 
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
@@ -75,14 +74,14 @@ public class AuthController : ControllerBase
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
             issuer: Environment.GetEnvironmentVariable("JWT_ISSUER"),
             audience: Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
             claims: claims,
             expires: DateTime.UtcNow.AddHours(2),
-            signingCredentials: creds
+            signingCredentials: credentials
         );
         
         return new JwtSecurityTokenHandler().WriteToken(token);
