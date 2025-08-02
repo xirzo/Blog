@@ -1,5 +1,4 @@
 import { useAuth } from "../../features/auth/model/useAuth";
-import "./profilePage.scss";
 
 function ProfilePage() {
   const { user } = useAuth();

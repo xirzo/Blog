@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import PostMini from "../../components/blogMini/postMini";
 import { getAllBlogs } from "../../entities/user/api/getAllBlogs";
 import type { Blog } from "../../entities/user/model/blog";
-import './blogPage.scss';
 
-function BlogPage() {
+function BlogsPage() {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -36,7 +35,7 @@ function BlogPage() {
     }
 
     return (
-        <div className="blog-page">
+        <div className="grid">
             <h1>All Blogs</h1>
             <div className="blog-post-holder">
                 {blogs.length > 0 ? (
@@ -60,4 +59,4 @@ function BlogPage() {
     );
 }
 
-export default BlogPage;
+export default BlogsPage;

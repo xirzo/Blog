@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../features/auth/model/useAuth";
 import { navigationItems } from "../../app/routes"
-import "./navbar.scss";
 
 function Navbar() {
     const { user, isAuthenticated, logout } = useAuth();
 
     return (
-        <nav className="navbar">
-            <div className="logo">
+        <nav>
+            <div>
                 <Link to="/">MyBlog</Link>
             </div>
             
-            <ul className="nav-links">
+            <ul>
                 {navigationItems.filter(item => item.path === "/" || item.path === "/blog").map(({ name, path }) => (
                     <li key={path}>
                         <Link to={path}>{name}</Link>

@@ -1,5 +1,3 @@
-import "./postMini.scss";
-
 export interface IPostMiniProps {
     name: string    
     description: string

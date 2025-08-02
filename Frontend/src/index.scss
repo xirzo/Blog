@@ -1,17 +1,33 @@
-:root {
+$break-mobile: 900px;
 
+$border-radius: 15px;
+
+$dark-background-color: #242424;
+$dark-foreground-color: #1a1a1a;
+
+$light-background-color: #faf9f6;
+$light-foreground-color: #ebebeb;
+
+/* root */
+
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: $dark-background-color;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
 a {
@@ -19,6 +35,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -29,15 +46,36 @@ body {
   min-height: 100vh;
 }
 
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: $dark-foreground-color;
+    background-color: $light-background-color;
+  }
+  button {
+    background-color: $light-foreground-color;
+  }
+}
+
+/* root */
+
+/* navbar */
+
 nav {
   width: 100%;
-  background-color: #1a1a1a;
+  background-color: $dark-foreground-color;
   padding: 0.5em 0;
-  border-radius: 15px;
+  border-radius: $border-radius;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   position: sticky;
   top: 0;
   z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
@@ -58,7 +96,6 @@ nav a {
   display: block;
   padding: 0.5em 1em;
   border-radius: 6px;
-  color: #646cff;
   transition: background 0.15s, color 0.15s;
   text-decoration: none;
   font-weight: 500;
@@ -72,11 +109,8 @@ nav a.active {
 
 @media (prefers-color-scheme: light) {
   nav {
-    background-color: #f6f6f8;
+    background-color: $light-foreground-color;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  nav a {
-    color: #535bf2;
   }
   nav a:hover,
   nav a.active {
@@ -85,39 +119,46 @@ nav a.active {
   }
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+/* navbar */
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* postMini */
+
+.post-mini {
+  padding: 1em;
+  border-radius: $border-radius;
+  background: $dark-foreground-color;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
+  .post-mini {
+    background: #f7f8ff;
+    border: 1px solid #e4e7fa;
+  }
+  .post-mini h2 {
     color: #213547;
-    background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  .post-mini p {
+    color: #444b5a;
   }
 }
+
+/* postMini */
+
+
+/* grid */
+
+.grid {
+  // TODO: add grid with 3 columns, also resize for mobile
+}
+
+/* grid */
+
+
+/* vertical stack */
+
+.vertical-stack * {
+  display: flex;
+  flex-direction: vertical;
+}
+
+/* vertical stack */

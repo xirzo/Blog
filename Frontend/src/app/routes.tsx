@@ -1,5 +1,5 @@
-import BlogPage from "../pages/blog/blogPage";
-import BlogDetailPage from "../pages/blogDetail/blogDetailPage";
+import BlogsPage from "../pages/blog/blogsPage";
+import BlogPostPage from "../pages/blogDetail/blogPage";
 import HomePage from "../pages/home/homePage";
 import LoginPage from "../pages/login/loginPage";
 import ProfilePage from "../pages/profile/profilePage";
@@ -7,8 +7,8 @@ import RegisterPage from "../pages/register/registerPage";
 
 export const publicRoutes = [
     { name: "Home", path: "/", element: <HomePage /> },
-    { name: "Blog", path: "/blog", element: <BlogPage /> },
-    { name: "BlogDetail", path: "/blog/:id", element: <BlogDetailPage /> },
+    { name: "Blog", path: "/blog", element: <BlogsPage /> },
+    { name: "BlogDetail", path: "/blog/:id", element: <BlogPostPage /> },
     { name: "Login", path: "/login", element: <LoginPage /> },
     { name: "Register", path: "/register", element: <RegisterPage /> },
 ];

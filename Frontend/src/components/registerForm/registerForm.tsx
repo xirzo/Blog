@@ -8,7 +8,9 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
 
   return (
-    <form onSubmit={e => {
+    <form 
+      className="vertical-stack"
+      onSubmit={e => {
       e.preventDefault();
       register(name, email, password);
     }}>
