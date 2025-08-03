@@ -19,4 +19,11 @@ public class BlogController : ControllerBase
     {
         return Ok(await _repository.GetAllAsync());
     }
+
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        return Ok(await _repository.GetById(id));
+    }
 }
