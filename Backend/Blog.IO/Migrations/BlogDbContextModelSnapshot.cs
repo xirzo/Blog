@@ -55,7 +55,7 @@ namespace Blog.IO.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BlogId")
+                    b.Property<Guid?>("BlogId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Created")
@@ -112,13 +112,9 @@ namespace Blog.IO.Migrations
 
             modelBuilder.Entity("Blog.Core.Entities.Post", b =>
                 {
-                    b.HasOne("Blog.Core.Entities.Blog", "Blog")
+                    b.HasOne("Blog.Core.Entities.Blog", null)
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("Blog.Core.Entities.Blog", b =>

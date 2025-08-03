@@ -11,8 +11,9 @@ public class DbPostRepository(BlogDbContext context) : IPostRepository
 
     public async Task<Post[]> GetBlogPostsAsync(Guid blogId)
     {
-        return await _context.Posts
-            .Where(post => post.BlogId == blogId)
+        return await _context.Blogs
+            .Where(blog => blog.Id == blogId)
+            .SelectMany(blog => blog.Posts)
             .ToArrayAsync();
     }
 }

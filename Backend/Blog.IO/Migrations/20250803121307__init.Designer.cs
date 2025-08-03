@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Blog.IO.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20250801153339__post_blog_added")]
-    partial class _post_blog_added
+    [Migration("20250803121307__init")]
+    partial class _init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace Blog.IO.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("BlogId")
+                    b.Property<Guid?>("BlogId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Created")
@@ -115,13 +115,9 @@ namespace Blog.IO.Migrations
 
             modelBuilder.Entity("Blog.Core.Entities.Post", b =>
                 {
-                    b.HasOne("Blog.Core.Entities.Blog", "Blog")
+                    b.HasOne("Blog.Core.Entities.Blog", null)
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
+                        .HasForeignKey("BlogId");
                 });
 
             modelBuilder.Entity("Blog.Core.Entities.Blog", b =>

@@ -36,10 +36,6 @@ public class BlogConfiguration : IEntityTypeConfiguration<Core.Entities.Blog>
             .WithMany()
             .HasForeignKey(blog => blog.AuthorId)
             .IsRequired();
-        
-        builder.HasMany(blog => blog.Posts)
-            .WithOne(blog => blog.Blog)
-            .HasForeignKey(blog => blog.BlogId);
     }
 }
 
@@ -48,9 +44,5 @@ public class PostConfiguration: IEntityTypeConfiguration<Post>
     public void Configure(EntityTypeBuilder<Post> builder)
     {
         builder.HasKey(post => post.Id);
-        builder.HasOne(post => post.Blog)
-            .WithMany(blog => blog.Posts)
-            .HasForeignKey(post => post.BlogId)
-            .IsRequired();
     }
 }
