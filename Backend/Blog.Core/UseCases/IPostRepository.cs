@@ -4,5 +4,5 @@ namespace Blog.Core.UseCases;
 
 public interface IPostRepository
 {
-    Task<Post[]> GetBlogPostsAsync(Guid blogId);
+    Task<Post[]> GetAll();
 }
