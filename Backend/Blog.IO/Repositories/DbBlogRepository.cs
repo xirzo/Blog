@@ -25,6 +25,9 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
 
     public async Task<Core.Entities.Blog?> GetById(Guid id)
     {
-        return await _context.Blogs.FirstOrDefaultAsync(blog => blog.Id == id);
+        return await _context.Blogs
+            .Include(blog => blog.Author)
+            .Include(blog => blog.Posts)
+            .FirstOrDefaultAsync(blog => blog.Id == id);
     }
 }
