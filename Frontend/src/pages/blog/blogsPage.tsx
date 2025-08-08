@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PostMini from "../../components/blogMini/postMini";
+import Miniature from "../../components/blogMini/postMini";
 import { getAllBlogs } from "../../entities/user/api/getAllBlogs";
 import type { Blog } from "../../entities/user/model/blog";
 
@@ -27,9 +27,7 @@ function BlogsPage() {
     }, []);
 
     if (isLoading) {
-        return <div className="loading">Loading blogs...</div>;
-    }
-
+        return <div className="loading">Loading blogs...</div>; }
     if (error) {
         return <div className="error-message">{error}</div>;
     }
@@ -45,7 +43,7 @@ function BlogsPage() {
                             to={`/blog/${blog.id}`} 
                             className="blog-link"
                         >
-                            <PostMini 
+                            <Miniature 
                                 name={blog.name}
                                 description={blog.description}
                             />

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../../shared/api/axios";
 import type { Blog } from "../../entities/user/model/blog";
+import { getBlog } from "../../entities/user/api/getBlog";
+import { Guid } from "guid-typescript";
 
 function BlogPage() {
     const { id } = useParams<{ id: string }>();
@@ -13,8 +15,12 @@ function BlogPage() {
         async function fetchBlog() {
             try {
                 setIsLoading(true);
-                const response = await api.get<Blog>(`/blog/${id}`);
-                setBlog(response.data);
+
+                if (!id) {
+                    return;
+                }
+
+                setBlog(await getBlog(Guid.parse(id)));
             } catch (err) {
                 console.error("Failed to fetch blog details:", err);
                 setError("Failed to load blog. Please try again later.");
@@ -53,7 +59,7 @@ function BlogPage() {
 
             <h2>Posts</h2>
 
-            <div >
+            <div>
                 {blog.posts && blog.posts.length > 0 ? (
                     blog.posts.map(post => (
                         <div key={post.id.toString()} >

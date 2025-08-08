@@ -8,22 +8,22 @@ function App() {
     return (
         <Router>
             <AuthProvider>
-                <Navbar />
-                <main>
-                    <Routes>
-                        {publicRoutes.map(({ path, element }) => (
-                            <Route key={path} path={path} element={element} />
-                        ))}
-
-                        {routes.map(({ path, element }) => (
-                            <Route
-                                key={path}
-                                path={path}
-                                element={<ProtectedRoute>{element}</ProtectedRoute>}
-                            />
-                        ))}
-                    </Routes>
-                </main>
+                    <Navbar />
+                    <main>
+                        <Routes>
+                            {publicRoutes.map(({ path, element }) => (
+                                <Route key={path} path={path} element={element} />
+                            ))}
+                            
+                            {routes.map(({ path, element }) => (
+                                <Route 
+                                    key={path} 
+                                    path={path} 
+                                    element={<ProtectedRoute>{element}</ProtectedRoute>} 
+                                />
+                            ))}
+                        </Routes>
+                    </main>
             </AuthProvider>
         </Router>
     );
