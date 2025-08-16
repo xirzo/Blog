@@ -12,8 +12,8 @@ import tailwindcss from '@tailwindcss/vite'
       port: 3000,
       strictPort: true,
       hmr: {
-        clientPort: 3000,
-        host: '0.0.0.0'
+        host: 'localhost',
+        port: 3000
       }
     }
   }); 
