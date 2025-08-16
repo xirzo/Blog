@@ -9,17 +9,21 @@ export const publicRoutes = [
     {name: "Home", path: "/", element: <HomePage/>},
     {name: "Blogs", path: "/blogs", element: <BlogsPage/>},
     {name: "Blog", path: "/blog/:id", element: <BlogPage/>},
+];
+
+export const publicOnlyRoutes = [
     {name: "Login", path: "/login", element: <LoginPage/>},
     {name: "Register", path: "/register", element: <RegisterPage/>},
 ];
 
-export const routes = [
+export const protectedRoutes = [
     {name: "Profile", path: "/profile", element: <ProfilePage/>},
 ];
 
 export const allRoutes = [
     ...publicRoutes,
-    ...routes
+    ...publicOnlyRoutes,
+    ...protectedRoutes
 ];
 
 export const navigationItems = [

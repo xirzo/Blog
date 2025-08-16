@@ -1,19 +1,21 @@
 import {useState} from "react";
 import {useAuth} from "../../features/auth/model/useAuth";
 import Button from "../../shared/ui/button.tsx";
+import {useNavigate} from "react-router-dom";
 
 function RegisterForm() {
     const {register} = useAuth();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     return (
         <form
             className={"flex flex-col gap-5"}
             onSubmit={e => {
                 e.preventDefault();
-                register(name, email, password);
+                register(name, email, password).then(r => navigate('/'));
             }}>
             <input
                 placeholder="Name"
