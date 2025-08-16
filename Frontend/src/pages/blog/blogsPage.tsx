@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Miniature from "../../components/blogMini/postMini";
-import { getAllBlogs } from "../../entities/user/api/getAllBlogs";
-import type { Blog } from "../../entities/user/model/blog";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import Miniature from "../../components/miniature/miniature.tsx";
+import {getAllBlogs} from "../../entities/user/api/getAllBlogs";
+import type {Blog} from "../../entities/user/model/blog";
 
 function BlogsPage() {
     const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -27,7 +27,8 @@ function BlogsPage() {
     }, []);
 
     if (isLoading) {
-        return <div className="loading">Loading blogs...</div>; }
+        return <div className="loading">Loading blogs...</div>;
+    }
     if (error) {
         return <div className="error-message">{error}</div>;
     }
@@ -38,12 +39,12 @@ function BlogsPage() {
             <div className="blog-post-holder">
                 {blogs.length > 0 ? (
                     blogs.map((blog) => (
-                        <Link 
-                            key={blog.id.toString()} 
-                            to={`/blog/${blog.id}`} 
+                        <Link
+                            key={blog.id.toString()}
+                            to={`/blog/${blog.id}`}
                             className="blog-link"
                         >
-                            <Miniature 
+                            <Miniature
                                 name={blog.name}
                                 description={blog.description}
                             />

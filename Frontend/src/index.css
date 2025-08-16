@@ -1,70 +1,48 @@
 @import "tailwindcss";
 
-/* root */
-
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #1a1a1a;
-    background-color: #faf9f6;
-  }
-  button {
-    background-color: #ebebeb;
-  }
-}
+    :root {
+        color: #1a1a1a;
+        background-color: #faf9f6;
+    }
 
-/* postMini */
-
-.post-mini {
-  padding: 1em;
-  border-radius: 15px;
-  background: #1a1a1a;
-}
-
-@media (prefers-color-scheme: light) {
-  .post-mini {
-    background: #f7f8ff;
-    border: 1px solid #e4e7fa;
-  }
-  .post-mini h2 {
-    color: #213547;
-  }
-  .post-mini p {
-    color: #444b5a;
-  }
+    button {
+        background-color: #ebebeb;
+    }
 }
