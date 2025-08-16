@@ -9,6 +9,8 @@ function BlogsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    const maxWordsInDescription = 50;
+
     useEffect(() => {
         async function fetchBlogs() {
             try {
@@ -34,25 +36,29 @@ function BlogsPage() {
     }
 
     return (
-        <div className="grid">
+        <>
             <h1>All Blogs</h1>
 
-            {blogs.length > 0 ? (
-                blogs.map((blog) => (
-                    <Link
-                        key={blog.id.toString()}
-                        to={`/blog/${blog.id}`}
-                    >
-                        <Miniature
-                            name={blog.name}
-                            description={blog.description}
-                        />
-                    </Link>
-                ))
-            ) : (
-                <p>No blogs found</p>
-            )}
-        </div>
+            <div className={"grid grid-cols-3 gap-5"}>
+
+                {blogs.length > 0 ? (
+                    blogs.map((blog) => (
+                        <Link
+                            key={blog.id.toString()}
+                            to={`/blog/${blog.id}`}
+                        >
+                            <Miniature
+                                name={blog.name}
+                                description={blog.description}
+                                maxWordsInDescription={maxWordsInDescription}
+                            />
+                        </Link>
+                    ))
+                ) : (
+                    <p>No blogs found</p>
+                )}
+            </div>
+        </>
     );
 }
 

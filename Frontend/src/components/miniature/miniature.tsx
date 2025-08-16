@@ -1,9 +1,26 @@
 export interface IMiniatureProps {
     name: string
     description: string
+    maxWordsInDescription?: number
 }
 
-function Miniature({name, description}: IMiniatureProps) {
+function trimWords(str: string, maxWords: number): string {
+
+    const words = str.split(' ');
+
+    if (words.length <= maxWords) {
+        return str;
+    }
+
+    return words.slice(0, maxWords).join(' ');
+}
+
+function Miniature({name, description, maxWordsInDescription}: IMiniatureProps) {
+    if (maxWordsInDescription !== undefined) {
+        console.log("lol")
+        description = trimWords(description, maxWordsInDescription);
+    }
+
     return (
         <div
             className="
