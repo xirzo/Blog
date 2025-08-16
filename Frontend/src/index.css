@@ -1,12 +1,4 @@
-$break-mobile: 900px;
-
-$border-radius: 15px;
-
-$dark-background-color: #242424;
-$dark-foreground-color: #1a1a1a;
-
-$light-background-color: #faf9f6;
-$light-foreground-color: #ebebeb;
+@import "tailwindcss";
 
 /* root */
 
@@ -17,7 +9,7 @@ $light-foreground-color: #ebebeb;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: $dark-background-color;
+  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,26 +38,23 @@ body {
   min-height: 100vh;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
-    color: $dark-foreground-color;
-    background-color: $light-background-color;
+    color: #1a1a1a;
+    background-color: #faf9f6;
   }
   button {
-    background-color: $light-foreground-color;
+    background-color: #ebebeb;
   }
 }
-
-/* root */
 
 /* navbar */
 
 nav {
   width: 100%;
-  background-color: $dark-foreground-color;
+  background-color: #1a1a1a;
   padding: 0.5em 0;
-  border-radius: $border-radius;
+  border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   position: sticky;
   top: 0;
@@ -109,7 +98,7 @@ nav a.active {
 
 @media (prefers-color-scheme: light) {
   nav {
-    background-color: $light-foreground-color;
+    background-color: #ebebeb;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
   nav a:hover,
@@ -119,14 +108,12 @@ nav a.active {
   }
 }
 
-/* navbar */
-
 /* postMini */
 
 .post-mini {
   padding: 1em;
-  border-radius: $border-radius;
-  background: $dark-foreground-color;
+  border-radius: 15px;
+  background: #1a1a1a;
 }
 
 @media (prefers-color-scheme: light) {
@@ -142,23 +129,20 @@ nav a.active {
   }
 }
 
-/* postMini */
-
-
 /* grid */
-
 .grid {
-  // TODO: add grid with 3 columns, also resize for mobile
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* grid */
-
-
 /* vertical stack */
-
-.vertical-stack * {
+.vertical-stack > * {
   display: flex;
-  flex-direction: vertical;
+  flex-direction: column;
 }
-
-/* vertical stack */
