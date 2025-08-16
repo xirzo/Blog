@@ -8,8 +8,8 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
 
   return (
-    <form 
-      className="vertical-stack"
+    <form
+        className={"flex flex-col gap-5"}
       onSubmit={e => {
       e.preventDefault();
       register(name, email, password);

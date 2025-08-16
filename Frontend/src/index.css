@@ -68,21 +68,3 @@ body {
     color: #444b5a;
   }
 }
-
-/* grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* vertical stack */
-.vertical-stack > * {
-  display: flex;
-  flex-direction: column;
-}
