@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 :root {
+    --dark-primary: #242424;
+    --dark-secondary: #1a1a1a;
+    --dark-accent: #faf9f6;
+
+    --light-primary: #faf9f6;
+    --light-secondary: #ebebeb;
+    --light-accent: #242424;
+
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
