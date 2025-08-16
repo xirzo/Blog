@@ -37,8 +37,6 @@ function BlogsPage() {
 
     return (
         <>
-            <h1>All Blogs</h1>
-
             <div className={"grid grid-cols-3 gap-5"}>
 
                 {blogs.length > 0 ? (

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useAuth} from "../../features/auth/model/useAuth";
+import Button from "../../shared/ui/button.tsx";
 
 export function LoginForm() {
     const {login} = useAuth();
@@ -13,9 +14,9 @@ export function LoginForm() {
                 e.preventDefault();
                 login(email, password);
             }}>
-            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="email"/>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password"/>
-            <button type="submit">Login</button>
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password"/>
+            <Button type="submit">Login</Button>
         </form>
     );
 }

@@ -2,6 +2,7 @@
 
 :root {
     --color-primary: #242424;
+    --color-primary-hover: #373636;
     --color-secondary: #1a1a1a;
     --color-accent: #faf9f6;
 
@@ -43,14 +44,11 @@ body {
 @media (prefers-color-scheme: light) {
     :root {
         --color-primary: #faf9f6;
+        --color-primary-hover: #f4f4f4;
         --color-secondary: #ebebeb;
         --color-accent: #242424;
 
         color: var(--color-accent);
         background-color: var(--color-primary);
-    }
-
-    button {
-        background-color: var(--color-secondary);
     }
 }

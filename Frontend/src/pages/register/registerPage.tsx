@@ -2,7 +2,9 @@ import RegisterForm from "../../components/registerForm/registerForm";
 
 function RegisterPage() {
     return (
-        <RegisterForm />
+        <div className={"m-10 w-1/2 mx-auto"}>
+            <RegisterForm/>
+        </div>
     )
 }
 

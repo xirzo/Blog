@@ -19,9 +19,7 @@ function BlogPage() {
                     return;
                 }
 
-                console.log(1)
                 setBlog(await getBlog(Guid.parse(id)));
-                console.log(2)
             } catch (err) {
                 console.error("Failed to fetch blogs details:", err);
                 setError("Failed to load blogs. Please try again later.");
@@ -45,7 +43,7 @@ function BlogPage() {
 
     return (
         <div>
-            <Link to="/blog"> ← Back to all blogs</Link>
+            <Link to="/blogs"> ← Back to all blogs</Link>
 
             <h1>{blog.name}</h1>
 

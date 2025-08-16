@@ -17,7 +17,6 @@ function trimWords(str: string, maxWords: number): string {
 
 function Miniature({name, description, maxWordsInDescription}: IMiniatureProps) {
     if (maxWordsInDescription !== undefined) {
-        console.log("lol")
         description = trimWords(description, maxWordsInDescription);
     }
 
