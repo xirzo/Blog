@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { api } from "../../shared/api/axios";
-import type { Blog } from "../../entities/user/model/blog";
-import { getBlog } from "../../entities/user/api/getBlog";
-import { Guid } from "guid-typescript";
+import {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import type {Blog} from "../../entities/user/model/blog";
+import {getBlog} from "../../entities/user/api/getBlog";
+import {Guid} from "guid-typescript";
 
 function BlogPage() {
-    const { id } = useParams<{ id: string }>();
+    const {id} = useParams<{ id: string }>();
     const [blog, setBlog] = useState<Blog | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -20,10 +19,12 @@ function BlogPage() {
                     return;
                 }
 
+                console.log(1)
                 setBlog(await getBlog(Guid.parse(id)));
+                console.log(2)
             } catch (err) {
-                console.error("Failed to fetch blog details:", err);
-                setError("Failed to load blog. Please try again later.");
+                console.error("Failed to fetch blogs details:", err);
+                setError("Failed to load blogs. Please try again later.");
             } finally {
                 setIsLoading(false);
             }
@@ -35,7 +36,7 @@ function BlogPage() {
     }, [id]);
 
     if (isLoading) {
-        return <div >Loading blog...</div>;
+        return <div>Loading blog...</div>;
     }
 
     if (error || !blog) {
@@ -43,7 +44,7 @@ function BlogPage() {
     }
 
     return (
-        <div >
+        <div>
             <Link to="/blog"> ← Back to all blogs</Link>
 
             <h1>{blog.name}</h1>
@@ -62,16 +63,16 @@ function BlogPage() {
             <div>
                 {blog.posts && blog.posts.length > 0 ? (
                     blog.posts.map(post => (
-                        <div key={post.id.toString()} >
+                        <div key={post.id.toString()}>
                             <h3>{post.name}</h3>
                             <p>{post.description.substring(0, 150)}...</p>
-                            <span >
+                            <span>
                                 {new Date(post.created).toLocaleDateString()}
                             </span>
                         </div>
                     ))
                 ) : (
-                    <p >This blog has no posts yet.</p>
+                    <p>This blog has no posts yet.</p>
                 )}
             </div>
         </div>

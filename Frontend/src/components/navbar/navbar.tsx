@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../../features/auth/model/useAuth";
-import { navigationItems } from "../../app/routes"
+import {Link} from "react-router-dom";
+import {useAuth} from "../../features/auth/model/useAuth";
+import {navigationItems} from "../../app/routes";
 
 function Navbar() {
-    const { user, isAuthenticated, logout } = useAuth();
+    const {user, isAuthenticated, logout} = useAuth();
 
     return (
         <nav
             className="
                 w-full
-                bg-[#1a1a1a]
-                dark:bg-[#1a1a1a]
+                bg-[var(--color-secondary)]
                 rounded-[15px]
                 shadow-[0_2px_4px_rgba(0,0,0,0.1)]
                 flex
@@ -22,19 +21,19 @@ function Navbar() {
                 z-[100]
                 static
                 top-0
-                dark:shadow-[0_2px_4px_rgba(0,0,0,0.1)]
-                bg-[#ebebeb] dark:bg-[#1a1a1a]
-                dark:shadow-[0_2px_8px_rgba(0,0,0,0.04)]
+                transition-colors
+                duration-200
             "
         >
             <div>
-                <Link to="/" className="text-xl font-bold text-white dark:text-white dark:hover:text-white hover:text-[#2a2a35]">
+                <Link to="/"
+                      className="text-xl font-bold text-[var(--color-accent)] hover:text-[var(--color-primary)] transition-colors">
                     MyBlog
                 </Link>
             </div>
 
             <ul className="flex gap-6 items-center m-0 px-8 list-none">
-                {navigationItems.filter(item => item.path === "/" || item.path === "/blog").map(({ name, path }) => (
+                {navigationItems.filter(item => item.path === "/" || item.path === "/blogs").map(({name, path}) => (
                     <li key={path} className="m-0 p-0">
                         <Link
                             to={path}
@@ -47,20 +46,12 @@ function Navbar() {
                                 transition-colors
                                 duration-150
                                 no-underline
-                                text-white
-                                dark:text-white
-                                hover:bg-[#2a2a35]
-                                hover:text-white
-                                active:bg-[#2a2a35]
-                                active:text-white
-                                dark:hover:bg-[#2a2a35]
-                                dark:hover:text-white
-                                dark:active:bg-[#2a2a35]
-                                dark:active:text-white
+                                text-[var(--color-accent)]
                                 bg-transparent
-                                dark:bg-transparent
-                                dark:hover:bg-[#e4e7fa]
-                                dark:hover:text-[#213547]
+                                hover:bg-[var(--color-accent)]
+                                hover:text-[var(--color-secondary)]
+                                active:bg-[var(--color-accent)]
+                                active:text-[var(--color-secondary)]
                             "
                         >
                             {name}
@@ -72,11 +63,11 @@ function Navbar() {
                     navigationItems
                         .filter(item =>
                             item.path !== "/" &&
-                            item.path !== "/blog" &&
+                            item.path !== "/blogs" &&
                             item.path !== "/login" &&
                             item.path !== "/register"
                         )
-                        .map(({ name, path }) => (
+                        .map(({name, path}) => (
                             <li key={path} className="m-0 p-0">
                                 <Link
                                     to={path}
@@ -89,20 +80,12 @@ function Navbar() {
                                         transition-colors
                                         duration-150
                                         no-underline
-                                        text-white
-                                        dark:text-white
-                                        hover:bg-[#2a2a35]
-                                        hover:text-white
-                                        active:bg-[#2a2a35]
-                                        active:text-white
-                                        dark:hover:bg-[#2a2a35]
-                                        dark:hover:text-white
-                                        dark:active:bg-[#2a2a35]
-                                        dark:active:text-white
+                                        text-[var(--color-accent)]
                                         bg-transparent
-                                        dark:bg-transparent
-                                        dark:hover:bg-[#e4e7fa]
-                                        dark:hover:text-[#213547]
+                                        hover:bg-[var(--color-accent)]
+                                        hover:text-[var(--color-secondary)]
+                                        active:bg-[var(--color-accent)]
+                                        active:text-[var(--color-secondary)]
                                     "
                                 >
                                     {name}
@@ -113,7 +96,7 @@ function Navbar() {
 
                 {isAuthenticated ? (
                     <>
-                        <li className="user-info m-0 p-0 text-white dark:text-white">
+                        <li className="user-info m-0 p-0 text-[var(--color-accent)]">
                             <span>Hello, {user?.name}</span>
                         </li>
                         <li className="m-0 p-0">
@@ -125,13 +108,10 @@ function Navbar() {
                                     font-medium
                                     transition-colors
                                     duration-150
-                                    text-white
-                                    dark:text-white
+                                    text-[var(--color-accent)]
                                     bg-transparent
-                                    hover:bg-[#2a2a35]
-                                    hover:text-white
-                                    dark:hover:bg-[#2a2a35]
-                                    dark:hover:text-white
+                                    hover:bg-[var(--color-accent)]
+                                    hover:text-[var(--color-secondary)]
                                     border-none
                                     outline-none
                                 "
@@ -155,16 +135,10 @@ function Navbar() {
                                     transition-colors
                                     duration-150
                                     no-underline
-                                    text-white
-                                    dark:text-white
-                                    hover:bg-[#2a2a35]
-                                    hover:text-white
-                                    dark:hover:bg-[#2a2a35]
-                                    dark:hover:text-white
+                                    text-[var(--color-accent)]
                                     bg-transparent
-                                    dark:bg-transparent
-                                    dark:hover:bg-[#e4e7fa]
-                                    dark:hover:text-[#213547]
+                                    hover:bg-[var(--color-accent)]
+                                    hover:text-[var(--color-secondary)]
                                 "
                             >
                                 Login
@@ -182,16 +156,10 @@ function Navbar() {
                                     transition-colors
                                     duration-150
                                     no-underline
-                                    text-white
-                                    dark:text-white
-                                    hover:bg-[#2a2a35]
-                                    hover:text-white
-                                    dark:hover:bg-[#2a2a35]
-                                    dark:hover:text-white
+                                    text-[var(--color-accent)]
                                     bg-transparent
-                                    dark:bg-transparent
-                                    dark:hover:bg-[#e4e7fa]
-                                    dark:hover:text-[#213547]
+                                    hover:bg-[var(--color-accent)]
+                                    hover:text-[var(--color-secondary)]
                                 "
                             >
                                 Register

@@ -27,33 +27,31 @@ function BlogsPage() {
     }, []);
 
     if (isLoading) {
-        return <div className="loading">Loading blogs...</div>;
+        return <div>Loading blogs...</div>;
     }
     if (error) {
-        return <div className="error-message">{error}</div>;
+        return <div>{error}</div>;
     }
 
     return (
         <div className="grid">
             <h1>All Blogs</h1>
-            <div className="blog-post-holder">
-                {blogs.length > 0 ? (
-                    blogs.map((blog) => (
-                        <Link
-                            key={blog.id.toString()}
-                            to={`/blog/${blog.id}`}
-                            className="blog-link"
-                        >
-                            <Miniature
-                                name={blog.name}
-                                description={blog.description}
-                            />
-                        </Link>
-                    ))
-                ) : (
-                    <div className="no-blogs">No blogs found</div>
-                )}
-            </div>
+
+            {blogs.length > 0 ? (
+                blogs.map((blog) => (
+                    <Link
+                        key={blog.id.toString()}
+                        to={`/blog/${blog.id}`}
+                    >
+                        <Miniature
+                            name={blog.name}
+                            description={blog.description}
+                        />
+                    </Link>
+                ))
+            ) : (
+                <p>No blogs found</p>
+            )}
         </div>
     );
 }

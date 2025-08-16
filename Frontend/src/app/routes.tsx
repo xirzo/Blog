@@ -1,20 +1,20 @@
-import BlogsPage from "../pages/blog/blogsPage";
-import BlogPostPage from "../pages/blogDetail/blogPage";
+import BlogsPage from "../pages/blogs/blogsPage";
+import BlogPage from "../pages/blog/blogPage";
 import HomePage from "../pages/home/homePage";
 import LoginPage from "../pages/login/loginPage";
 import ProfilePage from "../pages/profile/profilePage";
 import RegisterPage from "../pages/register/registerPage";
 
 export const publicRoutes = [
-    { name: "Home", path: "/", element: <HomePage /> },
-    { name: "Blog", path: "/blog", element: <BlogsPage /> },
-    { name: "BlogDetail", path: "/blog/:id", element: <BlogPostPage /> },
-    { name: "Login", path: "/login", element: <LoginPage /> },
-    { name: "Register", path: "/register", element: <RegisterPage /> },
+    {name: "Home", path: "/", element: <HomePage/>},
+    {name: "Blogs", path: "/blogs", element: <BlogsPage/>},
+    {name: "Blog", path: "/blog/:id", element: <BlogPage/>},
+    {name: "Login", path: "/login", element: <LoginPage/>},
+    {name: "Register", path: "/register", element: <RegisterPage/>},
 ];
 
 export const routes = [
-    { name: "Profile", path: "/profile", element: <ProfilePage /> },
+    {name: "Profile", path: "/profile", element: <ProfilePage/>},
 ];
 
 export const allRoutes = [
@@ -23,7 +23,7 @@ export const allRoutes = [
 ];
 
 export const navigationItems = [
-    { name: "Home", path: "/" },
-    { name: "Blog", path: "/blog" },
-    { name: "Profile", path: "/profile" }
+    {name: "Home", path: "/"},
+    {name: "Blogs", path: "/blogs"},
+    {name: "Profile", path: "/profile"}
 ];

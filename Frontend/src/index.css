@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
 :root {
-    --dark-primary: #242424;
-    --dark-secondary: #1a1a1a;
-    --dark-accent: #faf9f6;
-
-    --light-primary: #faf9f6;
-    --light-secondary: #ebebeb;
-    --light-accent: #242424;
+    --color-primary: #242424;
+    --color-secondary: #1a1a1a;
+    --color-accent: #faf9f6;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color: var(--color-accent);
+    background-color: var(--color-primary);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -46,11 +42,15 @@ body {
 
 @media (prefers-color-scheme: light) {
     :root {
-        color: #1a1a1a;
-        background-color: #faf9f6;
+        --color-primary: #faf9f6;
+        --color-secondary: #ebebeb;
+        --color-accent: #242424;
+
+        color: var(--color-accent);
+        background-color: var(--color-primary);
     }
 
     button {
-        background-color: #ebebeb;
+        background-color: var(--color-secondary);
     }
 }
