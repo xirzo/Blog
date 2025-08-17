@@ -59,7 +59,7 @@ function BlogPage() {
 
             <HorizontalLine/>
 
-            <article className={"text-lg"}>
+            <article className="prose">
                 <Markdown>
                     {blog.markdownContent}
                 </Markdown>
