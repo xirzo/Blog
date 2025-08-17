@@ -19,7 +19,6 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
     {
         return await _context.Blogs
             .Include(blog => blog.Author)
-            .Include(blog => blog.Posts)
             .ToArrayAsync();
     }
 
@@ -27,7 +26,6 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
     {
         return await _context.Blogs
             .Include(blog => blog.Author)
-            .Include(blog => blog.Posts)
             .FirstOrDefaultAsync(blog => blog.Id == id);
     }
 }
