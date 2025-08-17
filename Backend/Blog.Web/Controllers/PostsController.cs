@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Blog.Web.Controllers;
 
 [ApiController]
-[Route("blogs")]
-public class BlogController : ControllerBase
+[Route("posts")]
+public class PostsController : ControllerBase
 {
-    private readonly IBlogRepository _repository;
+    private readonly IPostRepository _repository;
 
-    public BlogController(IBlogRepository repository)
+    public PostsController(IPostRepository repository)
     {
         _repository = repository;
     }
@@ -64,7 +64,7 @@ public class BlogController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] BlogCreateDto dto)
     {
-        var blog = new Core.Entities.Blog
+        var blog = new Core.Entities.Post
         {
             Id = Guid.NewGuid(),
             Name = dto.Name,

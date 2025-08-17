@@ -4,32 +4,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.IO.Repositories;
 
-public class DbBlogRepository(BlogDbContext context) : IBlogRepository
+public class DbPostRepository(BlogDbContext context) : IPostRepository
 {
-    public async Task<Core.Entities.Blog?> CreateAsync(Core.Entities.Blog blog)
+    public async Task<Core.Entities.Post?> CreateAsync(Core.Entities.Post post)
     {
-        context.Blogs.Add(blog);
+        context.Posts.Add(post);
         await context.SaveChangesAsync();
-        return blog;
+        return post;
     }
 
-    public async Task<Core.Entities.Blog[]> GetAllAsync()
+    public async Task<Core.Entities.Post[]> GetAllAsync()
     {
-        return await context.Blogs
+        return await context.Posts
             .Include(blog => blog.Author)
             .ToArrayAsync();
     }
 
-    public async Task<Core.Entities.Blog?> GetByIdAsync(Guid id)
+    public async Task<Core.Entities.Post?> GetByIdAsync(Guid id)
     {
-        return await context.Blogs
+        return await context.Posts
             .Include(blog => blog.Author)
             .FirstOrDefaultAsync(blog => blog.Id == id);
     }
 
-    public async Task<Core.Entities.Blog[]> GetByUserIdAsync(Guid userId)
+    public async Task<Core.Entities.Post[]> GetByUserIdAsync(Guid userId)
     {
-        return await context.Blogs.
+        return await context.Posts.
             Include(blog => blog.Author)
             .Where(blog => blog.Author != null && blog.Author.Id == userId)
             .ToArrayAsync();
@@ -37,21 +37,21 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
 
     public async Task<bool> DeleteByIdAsync(Guid id)
     {
-        var blog = await context.FindAsync<Core.Entities.Blog>(id);
+        var blog = await context.FindAsync<Core.Entities.Post>(id);
 
         if (blog == null)
         {
             return false;
         }
 
-        context.Blogs.Remove(blog);
+        context.Posts.Remove(blog);
         await context.SaveChangesAsync();
         return true;
     }
     
-    public async Task<Core.Entities.Blog?> UpdateAsync(Guid id, string? name, string? description, string? markdownContent)
+    public async Task<Core.Entities.Post?> UpdateAsync(Guid id, string? name, string? description, string? markdownContent)
     {
-        var blog = context.Blogs.FirstOrDefault(blog => blog.Id == id);
+        var blog = context.Posts.FirstOrDefault(blog => blog.Id == id);
 
         if (blog == null)
         {

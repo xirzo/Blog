@@ -1,6 +1,6 @@
 namespace Blog.Core.Entities;
 
-public class Blog
+public class Post
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }
