@@ -4,7 +4,7 @@ import type {Blog} from "../../entities/user/model/blog";
 import {getBlog} from "../../entities/user/api/getBlog";
 import {Guid} from "guid-typescript";
 import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
-import FormattedDate from "../../shared/ui/date.tsx";
+import FormattedDate from "../../shared/ui/formattedDate.tsx";
 
 function BlogPage() {
     const {id} = useParams<{ id: string }>();
@@ -45,7 +45,7 @@ function BlogPage() {
 
     return (
         <div className={"flex flex-col text-start"}>
-            <Link className={"mb-2 text-[var(--color-secondary-text)]"} to="/"> Back to all blogs ←</Link>
+            <Link to="/"> Back to all blogs ←</Link>
 
             <h1 className="font-light text-[10vw] md:text-[3vw] mb-4 text-[var(--color-primary-text)]">{blog.name}</h1>
 
