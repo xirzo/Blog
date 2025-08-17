@@ -2,7 +2,7 @@ import FormattedDate from "../shared/ui/formattedDate.tsx";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import {Link} from "react-router-dom";
 
-export interface IBlogMiniature {
+export interface IPostMiniatureProps {
     blodId: string;
     name: string
     description: string
@@ -22,7 +22,7 @@ function trimWords(str: string, maxWords: number): string {
     return words.slice(0, maxWords).join(' ');
 }
 
-function BlogMiniature({blodId, name, description, date, maxWordsInDescription, linkTo}: IBlogMiniature) {
+function PostMiniature({blodId, name, description, date, maxWordsInDescription, linkTo}: IPostMiniatureProps) {
     if (maxWordsInDescription !== undefined) {
         description = trimWords(description, maxWordsInDescription);
     }
@@ -53,4 +53,4 @@ function BlogMiniature({blodId, name, description, date, maxWordsInDescription, 
     );
 }
 
-export default BlogMiniature;
+export default PostMiniature;

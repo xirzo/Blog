@@ -1,7 +1,7 @@
 import type {Guid} from "guid-typescript";
 import type {User} from "./user.ts";
 
-export type Blog = {
+export type Post = {
     id: Guid;
     name: string;
     description: string;

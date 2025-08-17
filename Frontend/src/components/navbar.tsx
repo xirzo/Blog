@@ -33,7 +33,7 @@ function Navbar() {
             </div>
 
             <ul className="flex gap-6 items-center m-0 px-8 list-none">
-                {navigationItems.filter(item => item.path === "/" || item.path === "/blogs").map(({name, path}) => (
+                {navigationItems.filter(item => item.path === "/" || item.path === "/posts").map(({name, path}) => (
                     <li key={path} className="m-0 p-0">
                         <Link
                             to={path}
@@ -63,7 +63,7 @@ function Navbar() {
                     navigationItems
                         .filter(item =>
                             item.path !== "/" &&
-                            item.path !== "/blogs" &&
+                            item.path !== "/posts" &&
                             item.path !== "/login" &&
                             item.path !== "/register"
                         )

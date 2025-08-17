@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import type {Blog} from "../entities/model/blog.ts";
-import {getBlog} from "../entities/api/getBlog.ts";
-import {updateBlog} from "../entities/api/updateBlog.ts";
+import type {Post} from "../entities/model/post.ts";
+import {getPost} from "../entities/api/getPost.ts";
+import {updatePost} from "../entities/api/updatePost.ts";
 import {Guid} from "guid-typescript";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import Button from "../shared/ui/button.tsx";
 
-function BlogEditPage() {
+function PostEditPage() {
     const {id} = useParams<{ id: string }>();
-    const [blog, setBlog] = useState<Blog | null>(null);
+    const [post, setpost] = useState<Post | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
@@ -20,56 +20,56 @@ function BlogEditPage() {
     const [markdownContent, setMarkdownContent] = useState("");
 
     useEffect(() => {
-        async function fetchBlog() {
+        async function fetchPost() {
             try {
                 setIsLoading(true);
                 setError(null);
 
                 if (!id) return;
 
-                const loadedBlog = await getBlog(Guid.parse(id));
-                setBlog(loadedBlog);
-                setName(loadedBlog.name);
-                setDescription(loadedBlog.description);
-                setMarkdownContent(loadedBlog.markdownContent);
+                const loadedPost = await getPost(Guid.parse(id));
+                setpost(loadedPost);
+                setName(loadedPost.name);
+                setDescription(loadedPost.description);
+                setMarkdownContent(loadedPost.markdownContent);
             } catch (err) {
-                console.error("Failed to fetch blog details:", err);
-                setError("Failed to load blog. Please try again later.");
+                console.error("Failed to fetch post details:", err);
+                setError("Failed to load post. Please try again later.");
             } finally {
                 setIsLoading(false);
             }
         }
 
         if (id) {
-            fetchBlog();
+            fetchPost();
         }
     }, [id]);
 
     const handleSave = async () => {
-        if (!blog) return;
+        if (!post) return;
         setIsSaving(true);
         setSaveError(null);
 
         try {
-            await updateBlog(blog.id, {
+            await updatePost(post.id, {
                 name,
                 description,
                 markdownContent
             });
         } catch (err) {
-            console.error("Failed to update blog details:", err);
-            setSaveError("Failed to update blog. Please try again.");
+            console.error("Failed to update post details:", err);
+            setSaveError("Failed to update post. Please try again.");
         } finally {
             setIsSaving(false);
         }
     };
 
     if (isLoading) {
-        return <div>Loading blog...</div>;
+        return <div>Loading post...</div>;
     }
 
-    if (error || !blog) {
-        return <div>{error || "Blog not found"}</div>;
+    if (error || !post) {
+        return <div>{error || "Post not found"}</div>;
     }
 
     return (
@@ -110,4 +110,4 @@ function BlogEditPage() {
     );
 }
 
-export default BlogEditPage;
+export default PostEditPage;

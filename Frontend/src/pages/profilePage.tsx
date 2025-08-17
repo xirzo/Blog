@@ -1,63 +1,63 @@
 import {useAuth} from "../features/auth/model/useAuth.ts";
 import {useEffect, useState} from "react";
-import type {Blog} from "../entities/model/blog.ts";
-import {getBlogsByUser} from "../entities/api/getBlogsByUser.ts";
+import type {Post} from "../entities/model/post.ts";
+import {getPostsByUser} from "../entities/api/getPostsByUser.ts";
 import Button from "../shared/ui/button.tsx";
 import {useNavigate} from "react-router-dom";
-import {deleteBlog} from "../entities/api/deleteBlog.ts";
+import {deletePost} from "../entities/api/deletePost.ts";
 
 function ProfilePage() {
     const {user} = useAuth();
-    const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [areBlogsLoading, setAreBlogsLoading] = useState(false);
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [arePostsLoading, setArePostsLoading] = useState(false);
     const navigate = useNavigate();
 
-    async function fetchBlogs() {
+    async function fetchPosts() {
         try {
-            setAreBlogsLoading(true);
-            const blogsData = await getBlogsByUser(user.id);
-            setBlogs(blogsData);
+            setArePostsLoading(true);
+            const postsData = await getPostsByUser(user.id);
+            setPosts(postsData);
         } catch (err) {
             console.log(err);
         } finally {
-            setAreBlogsLoading(false);
+            setArePostsLoading(false);
         }
     }
 
     useEffect(() => {
-        fetchBlogs();
+        fetchPosts();
     }, []);
 
-    async function handleDeletion(blogId: string) {
+    async function handleDeletion(postId: string) {
         try {
-            await deleteBlog(blogId);
-            fetchBlogs();
+            await deletePost(postId);
+            fetchPosts();
         } catch (err) {
-            console.error("Failed to delete blog:", err);
+            console.error("Failed to delete post:", err);
         }
     }
 
-    if (areBlogsLoading) {
+    if (arePostsLoading) {
         return <p>Loading...</p>;
     }
 
     return (
         <div className="profile-page">
-            <h2 className={"text-2xl mb-5"}>Blogs</h2>
+            <h2 className={"text-2xl mb-5"}>Posts</h2>
             <div className={"gap-5 flex flex-col mb-5"}>
-                {blogs.length > 0 ? (
-                    blogs.map((blog) => (
-                        <div key={blog.id.toString()}
+                {posts.length > 0 ? (
+                    posts.map((post) => (
+                        <div key={post.id.toString()}
                              className={"flex flex-row text-start items-center gap-4"}>
-                            <h1>{blog.name}</h1>
-                            <Button onClick={() => navigate(`/blog/edit/${blog.id.toString()}`)}>Edit</Button>
-                            <Button onClick={() => handleDeletion(blog.id.toString())}>Delete</Button>
+                            <h1>{post.name}</h1>
+                            <Button onClick={() => navigate(`/post/edit/${post.id.toString()}`)}>Edit</Button>
+                            <Button onClick={() => handleDeletion(post.id.toString())}>Delete</Button>
                         </div>
                     ))
                 ) : (
-                    <p>No blogs</p>
+                    <p>No posts</p>
                 )}
-                <Button onClick={() => navigate(`/blog/create`)}>Create</Button>
+                <Button onClick={() => navigate(`/post/create`)}>Create</Button>
             </div>
             {user && (
                 <div className="profile-card">

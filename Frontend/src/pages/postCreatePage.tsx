@@ -1,10 +1,10 @@
 import {useState} from "react";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import Button from "../shared/ui/button.tsx";
-import {createBlog} from "../entities/api/createBlog.ts";
+import {createPost} from "../entities/api/createPost.ts";
 import {useAuth} from "../features/auth/model/useAuth.ts";
 
-function BlogCreatePage() {
+function PostCreatePage() {
     const [name, setName] = useState("");
     const authContext = useAuth();
     const [description, setDescription] = useState("");
@@ -17,7 +17,7 @@ function BlogCreatePage() {
         setSaveError(null);
 
         try {
-            await createBlog({
+            await createPost({
                 name,
                 description,
                 markdownContent,
@@ -27,8 +27,8 @@ function BlogCreatePage() {
             setDescription("");
             setMarkdownContent("")
         } catch (err) {
-            console.error("Failed to create blog:", err);
-            setSaveError("Failed to create blog. Please try again.");
+            console.error("Failed to create post:", err);
+            setSaveError("Failed to create post. Please try again.");
         } finally {
             setIsSaving(false);
         }
@@ -36,7 +36,7 @@ function BlogCreatePage() {
 
     return (
         <div className={"flex flex-col text-start gap-5"}>
-            <h1 className={"text-4xl"}>Create Blog</h1>
+            <h1 className={"text-4xl"}>Create Post</h1>
             <HorizontalLine bottomMargin={2}/>
 
             <h2 className={"text-xl"}>Name</h2>
@@ -71,4 +71,4 @@ function BlogCreatePage() {
     );
 }
 
-export default BlogCreatePage;
+export default PostCreatePage;

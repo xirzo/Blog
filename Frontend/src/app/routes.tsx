@@ -1,14 +1,14 @@
-import BlogsPage from "../pages/blogsPage.tsx";
-import BlogPage from "../pages/blogPage.tsx";
+import PostsPage from "../pages/postsPage.tsx";
+import PostPage from "../pages/postPage.tsx";
 import LoginPage from "../pages/loginPage.tsx";
 import ProfilePage from "../pages/profilePage.tsx";
 import RegisterPage from "../pages/registerPage.tsx";
-import BlogEditPage from "../pages/blogEditPage.tsx";
-import BlogCreatePage from "../pages/blogCreatePage.tsx";
+import PostEditPage from "../pages/postEditPage.tsx";
+import PostCreatePage from "../pages/postCreatePage.tsx";
 
 export const publicRoutes = [
-    {name: "Blogs", path: "/", element: <BlogsPage/>},
-    {name: "Blog", path: "/blog/:id", element: <BlogPage/>},
+    {name: "Posts", path: "/", element: <PostsPage/>},
+    {name: "Post", path: "/post/:id", element: <PostPage/>},
 ];
 
 export const publicOnlyRoutes = [
@@ -18,8 +18,8 @@ export const publicOnlyRoutes = [
 
 export const protectedRoutes = [
     {name: "Profile", path: "/profile", element: <ProfilePage/>},
-    {name: "Blog Edit", path: "/blog/edit/:id", element: <BlogEditPage/>},
-    {name: "Blog Create", path: "/blog/create", element: <BlogCreatePage/>},
+    {name: "Post Edit", path: "/post/edit/:id", element: <PostEditPage/>},
+    {name: "Post Create", path: "/post/create", element: <PostCreatePage/>},
 ];
 
 export const allRoutes = [
@@ -29,6 +29,6 @@ export const allRoutes = [
 ];
 
 export const navigationItems = [
-    {name: "Blogs", path: "/"},
+    {name: "Posts", path: "/"},
     {name: "Profile", path: "/profile"}
 ];
