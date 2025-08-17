@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Navbar from '../components/navbar/navbar';
+import Navbar from '../components/navbar.tsx';
 import {protectedRoutes, publicOnlyRoutes, publicRoutes} from './routes';
 import {ProtectedRoute} from '../shared/ui/protectedRoute'
 import {AuthProvider} from '../features/auth/ui/authProvider';

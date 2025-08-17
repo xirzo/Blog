@@ -1,10 +1,10 @@
-import {useAuth} from "../../features/auth/model/useAuth";
+import {useAuth} from "../features/auth/model/useAuth.ts";
 import {useEffect, useState} from "react";
-import type {Blog} from "../../entities/model/blog.ts";
-import {getBlogsByUser} from "../../entities/api/getBlogsByUser.ts";
-import Button from "../../shared/ui/button.tsx";
+import type {Blog} from "../entities/model/blog.ts";
+import {getBlogsByUser} from "../entities/api/getBlogsByUser.ts";
+import Button from "../shared/ui/button.tsx";
 import {useNavigate} from "react-router-dom";
-import {deleteBlog} from "../../entities/api/deleteBlog.ts";
+import {deleteBlog} from "../entities/api/deleteBlog.ts";
 
 function ProfilePage() {
     const {user} = useAuth();

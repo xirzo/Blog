@@ -1,5 +1,5 @@
-import FormattedDate from "../../shared/ui/formattedDate.tsx";
-import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
+import FormattedDate from "../shared/ui/formattedDate.tsx";
+import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import {Link} from "react-router-dom";
 
 export interface IBlogMiniature {

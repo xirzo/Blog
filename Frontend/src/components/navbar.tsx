@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import {useAuth} from "../../features/auth/model/useAuth";
-import {navigationItems} from "../../app/routes";
+import {useAuth} from "../features/auth/model/useAuth.ts";
+import {navigationItems} from "../app/routes.tsx";
 
 function Navbar() {
     const {user, isAuthenticated, logout} = useAuth();

@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import type {Blog} from "../../entities/model/blog";
-import {getBlog} from "../../entities/api/getBlog";
-import {updateBlog} from "../../entities/api/updateBlog";
+import type {Blog} from "../entities/model/blog.ts";
+import {getBlog} from "../entities/api/getBlog.ts";
+import {updateBlog} from "../entities/api/updateBlog.ts";
 import {Guid} from "guid-typescript";
-import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
-import Button from "../../shared/ui/button.tsx";
+import HorizontalLine from "../shared/ui/horizontalLine.tsx";
+import Button from "../shared/ui/button.tsx";
 
 function BlogEditPage() {
     const {id} = useParams<{ id: string }>();

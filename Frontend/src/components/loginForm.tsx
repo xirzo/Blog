@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {useAuth} from "../../features/auth/model/useAuth";
-import Button from "../../shared/ui/button.tsx";
+import {useAuth} from "../features/auth/model/useAuth.ts";
+import Button from "../shared/ui/button.tsx";
 import {useNavigate} from "react-router-dom";
 
 export function LoginForm() {

@@ -1,8 +1,8 @@
 import {useState} from "react";
-import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
-import Button from "../../shared/ui/button.tsx";
-import {createBlog} from "../../entities/api/createBlog.ts";
-import {useAuth} from "../../features/auth/model/useAuth.ts";
+import HorizontalLine from "../shared/ui/horizontalLine.tsx";
+import Button from "../shared/ui/button.tsx";
+import {createBlog} from "../entities/api/createBlog.ts";
+import {useAuth} from "../features/auth/model/useAuth.ts";
 
 function BlogCreatePage() {
     const [name, setName] = useState("");

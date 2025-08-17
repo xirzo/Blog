@@ -1,10 +1,10 @@
-import BlogsPage from "../pages/blogs/blogsPage";
-import BlogPage from "../pages/blog/blogPage";
-import LoginPage from "../pages/login/loginPage";
-import ProfilePage from "../pages/profile/profilePage";
-import RegisterPage from "../pages/register/registerPage";
-import BlogEditPage from "../pages/blogEdit/blogEditPage";
-import BlogCreatePage from "../pages/blogCreate/blogCreatePage.tsx";
+import BlogsPage from "../pages/blogsPage.tsx";
+import BlogPage from "../pages/blogPage.tsx";
+import LoginPage from "../pages/loginPage.tsx";
+import ProfilePage from "../pages/profilePage.tsx";
+import RegisterPage from "../pages/registerPage.tsx";
+import BlogEditPage from "../pages/blogEditPage.tsx";
+import BlogCreatePage from "../pages/blogCreatePage.tsx";
 
 export const publicRoutes = [
     {name: "Blogs", path: "/", element: <BlogsPage/>},
