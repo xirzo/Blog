@@ -36,4 +36,18 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
             .Where(blog => blog.Author != null && blog.Author.Id == userId)
             .ToArrayAsync();
     }
+
+    public async Task<bool> DeleteById(Guid id)
+    {
+        var blog = await _context.FindAsync<Core.Entities.Blog>(id);
+
+        if (blog == null)
+        {
+            return false;
+        }
+
+        _context.Blogs.Remove(blog);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

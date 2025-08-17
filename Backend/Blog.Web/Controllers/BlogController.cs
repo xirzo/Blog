@@ -31,4 +31,18 @@ public class BlogController : ControllerBase
     {
         return Ok(await _repository.GetById(id));
     }
+    
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteById(Guid id)
+    {
+        var isDeleted = await _repository.DeleteById(id);
+
+        if (isDeleted)
+        {
+            return NoContent();
+        }
+
+        return NotFound();
+    }
 }
