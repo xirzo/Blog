@@ -1,6 +1,10 @@
 ﻿import React from "react";
 
-function FormattedDate({date}: { date: Date | string | number }) {
+interface IFormattedDateProps {
+    date: Date | string | number;
+}
+
+function FormattedDate({date}: IFormattedDateProps) {
     const d = new Date(date);
 
     if (isNaN(d.getTime())) {
