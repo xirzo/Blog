@@ -15,13 +15,18 @@ public class BlogController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] Guid? userId)
     {
+        if (userId.HasValue)
+        {
+            return Ok(await _repository.GetByUserId(userId.Value));
+        }
+
         return Ok(await _repository.GetAllAsync());
     }
 
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         return Ok(await _repository.GetById(id));

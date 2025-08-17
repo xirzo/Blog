@@ -28,4 +28,12 @@ public class DbBlogRepository(BlogDbContext context) : IBlogRepository
             .Include(blog => blog.Author)
             .FirstOrDefaultAsync(blog => blog.Id == id);
     }
+
+    public async Task<Core.Entities.Blog[]> GetByUserId(Guid userId)
+    {
+        return await _context.Blogs.
+            Include(blog => blog.Author)
+            .Where(blog => blog.Author != null && blog.Author.Id == userId)
+            .ToArrayAsync();
+    }
 }
