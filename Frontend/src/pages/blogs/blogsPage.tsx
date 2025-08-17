@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import Miniature from "../../components/miniature/miniature.tsx";
+import BlogMiniature from "../../components/blogMiniature/blogMiniature.tsx";
 import {getAllBlogs} from "../../entities/user/api/getAllBlogs";
 import type {Blog} from "../../entities/user/model/blog";
 
@@ -36,27 +35,23 @@ function BlogsPage() {
     }
 
     return (
-        <>
-            <div className={"grid grid-cols-3 gap-5"}>
-
-                {blogs.length > 0 ? (
-                    blogs.map((blog) => (
-                        <Link
-                            key={blog.id.toString()}
-                            to={`/blog/${blog.id}`}
-                        >
-                            <Miniature
-                                name={blog.name}
-                                description={blog.description}
-                                maxWordsInDescription={maxWordsInDescription}
-                            />
-                        </Link>
-                    ))
-                ) : (
-                    <p>No blogs found</p>
-                )}
-            </div>
-        </>
+        <div className={"flex flex-col gap-5"}>
+            {blogs.length > 0 ? (
+                blogs.map((blog) => (
+                    <BlogMiniature
+                        key={blog.id.toString()}
+                        blodId={blog.id.toString()}
+                        name={blog.name}
+                        description={blog.description}
+                        date={blog.created}
+                        linkTo={`/blog/${blog.id}`}
+                        maxWordsInDescription={maxWordsInDescription}
+                    />
+                ))
+            ) : (
+                <p>No blogs</p>
+            )}
+        </div>
     );
 }
 

@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({children, ...props}: ButtonProps) => {
                 text-sm
                 font-medium
                 bg-[var(--color-secondary)]
-                text-[var(--color-accent)]
+                text-[var(--color-primary-text)]
                 transition-colors
                 duration-150
                 hover:bg-[var(--color-primary-hover)]
