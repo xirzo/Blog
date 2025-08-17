@@ -1,13 +1,11 @@
 import BlogsPage from "../pages/blogs/blogsPage";
 import BlogPage from "../pages/blog/blogPage";
-import HomePage from "../pages/home/homePage";
 import LoginPage from "../pages/login/loginPage";
 import ProfilePage from "../pages/profile/profilePage";
 import RegisterPage from "../pages/register/registerPage";
 
 export const publicRoutes = [
-    {name: "Home", path: "/", element: <HomePage/>},
-    {name: "Blogs", path: "/blogs", element: <BlogsPage/>},
+    {name: "Blogs", path: "/", element: <BlogsPage/>},
     {name: "Blog", path: "/blog/:id", element: <BlogPage/>},
 ];
 
@@ -27,7 +25,6 @@ export const allRoutes = [
 ];
 
 export const navigationItems = [
-    {name: "Home", path: "/"},
-    {name: "Blogs", path: "/blogs"},
+    {name: "Blogs", path: "/"},
     {name: "Profile", path: "/profile"}
 ];
