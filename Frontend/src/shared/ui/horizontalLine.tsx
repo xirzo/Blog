@@ -1,5 +1,13 @@
-﻿function HorizontalLine() {
-    return <hr className="h-px mb-8 bg-[var(--color-secondary-text)] border-0 "/>
+﻿interface IHorizontalLineProps {
+    bottomMargin: number | undefined;
+}
+
+function HorizontalLine({bottomMargin}: IHorizontalLineProps) {
+    if (bottomMargin === undefined) {
+        bottomMargin = 8;
+    }
+
+    return <hr className={`h-px mb-${bottomMargin} bg-[var(--color-secondary-text)] border-0`}/>
 }
 
 export default HorizontalLine;
