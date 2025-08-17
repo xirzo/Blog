@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import BlogMiniature from "../../components/blogMiniature/blogMiniature.tsx";
-import {getAllBlogs} from "../../entities/user/api/getAllBlogs";
-import type {Blog} from "../../entities/user/model/blog";
+import {getAllBlogs} from "../../entities/api/getAllBlogs";
+import type {Blog} from "../../entities/model/blog";
 
 function BlogsPage() {
     const [blogs, setBlogs] = useState<Blog[]>([]);

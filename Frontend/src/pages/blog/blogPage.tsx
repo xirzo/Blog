@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import type {Blog} from "../../entities/user/model/blog";
-import {getBlog} from "../../entities/user/api/getBlog";
+import type {Blog} from "../../entities/model/blog";
+import {getBlog} from "../../entities/api/getBlog";
 import {Guid} from "guid-typescript";
 import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
 import FormattedDate from "../../shared/ui/formattedDate.tsx";
