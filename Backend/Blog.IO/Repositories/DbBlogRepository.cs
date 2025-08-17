@@ -6,7 +6,7 @@ namespace Blog.IO.Repositories;
 
 public class DbBlogRepository(BlogDbContext context) : IBlogRepository
 {
-    public async Task<Core.Entities.Blog?> AddAsync(Core.Entities.Blog blog)
+    public async Task<Core.Entities.Blog?> CreateAsync(Core.Entities.Blog blog)
     {
         context.Blogs.Add(blog);
         await context.SaveChangesAsync();

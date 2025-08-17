@@ -2,7 +2,7 @@ namespace Blog.Core.UseCases;
 
 public interface IBlogRepository
 {
-    Task<Entities.Blog?> AddAsync(Entities.Blog blog);
+    Task<Entities.Blog?> CreateAsync(Entities.Blog blog);
     Task<Entities.Blog[]> GetAllAsync();
     Task<Entities.Blog?> GetByIdAsync(Guid id);
     Task<Entities.Blog[]> GetByUserIdAsync(Guid userId);

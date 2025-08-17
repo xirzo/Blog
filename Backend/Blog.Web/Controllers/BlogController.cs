@@ -59,4 +59,28 @@ public class BlogController : ControllerBase
 
         return Ok(blog);
     }
+    
+    
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] BlogCreateDto dto)
+    {
+        var blog = new Core.Entities.Blog
+        {
+            Id = Guid.NewGuid(),
+            Name = dto.Name,
+            Description = dto.Description,
+            MarkdownContent = dto.MarkdownContent,
+            Created = DateTime.UtcNow,
+            AuthorId = dto.AuthorId,
+        };
+        
+        var created = await _repository.CreateAsync(blog);
+
+        if (created == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(blog);
+    }
 }

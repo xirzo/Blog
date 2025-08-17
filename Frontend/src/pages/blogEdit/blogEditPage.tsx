@@ -101,11 +101,11 @@ function BlogEditPage() {
                 className="border p-2"
             />
 
+            {saveError && <p className="text-[var(--color-error)]">{saveError}</p>}
+
             <Button onClick={handleSave} disabled={isSaving}>
                 {isSaving ? "Saving..." : "Save"}
             </Button>
-
-            {saveError && <p className="text-[var(--color-error)]">{saveError}</p>}
         </div>
     );
 }
