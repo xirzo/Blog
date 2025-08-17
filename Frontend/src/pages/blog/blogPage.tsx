@@ -3,6 +3,8 @@ import {Link, useParams} from "react-router-dom";
 import type {Blog} from "../../entities/user/model/blog";
 import {getBlog} from "../../entities/user/api/getBlog";
 import {Guid} from "guid-typescript";
+import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
+import FormattedDate from "../../shared/ui/date.tsx";
 
 function BlogPage() {
     const {id} = useParams<{ id: string }>();
@@ -42,37 +44,23 @@ function BlogPage() {
     }
 
     return (
-        <div>
-            <Link to="/"> ← Back to all blogs</Link>
+        <div className={"flex flex-col text-start"}>
+            <Link className={"mb-2 text-[var(--color-secondary-text)]"} to="/"> Back to all blogs ←</Link>
 
-            <h1>{blog.name}</h1>
+            <h1 className="font-light text-[10vw] md:text-[3vw] mb-4 text-[var(--color-primary-text)]">{blog.name}</h1>
 
-            <p>
-                Created on {new Date(blog.created).toLocaleDateString()}
+            <p className={"font-light mb-2 text-[var(--color-secondary-text)] mb-8"}>{blog.description}</p>
+
+            <p className={"font-light mb-2 text-[var(--color-secondary-text)]"}>
+                <FormattedDate date={blog.created}/>
                 {blog.author && <span> by {blog.author.name}</span>}
             </p>
 
-            <div>
-                <p>{blog.description}</p>
-            </div>
+            <HorizontalLine/>
 
-            <h2>Posts</h2>
-
-            <div>
-                {blog.posts && blog.posts.length > 0 ? (
-                    blog.posts.map(post => (
-                        <div key={post.id.toString()}>
-                            <h3>{post.name}</h3>
-                            <p>{post.description.substring(0, 150)}...</p>
-                            <span>
-                                {new Date(post.created).toLocaleDateString()}
-                            </span>
-                        </div>
-                    ))
-                ) : (
-                    <p>This blog has no posts yet.</p>
-                )}
-            </div>
+            <article className={"text-lg"}>
+                {blog.htmlContent}
+            </article>
         </div>
     );
 }

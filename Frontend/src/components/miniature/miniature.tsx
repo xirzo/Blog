@@ -36,7 +36,7 @@ function Miniature({name, description, maxWordsInDescription}: IMiniatureProps) 
                 className="
                 text-xl
                 font-semibold
-                text-[var(--color-accent)]
+                text-[var(--color-primary-text)]
               "
             >
                 {name}
@@ -44,7 +44,7 @@ function Miniature({name, description, maxWordsInDescription}: IMiniatureProps) 
             <p
                 className="
                     text-base
-                    text-[var(--color-accent)]
+                    text-[var(--color-primary-text)]
                 "
             >
                 {description}

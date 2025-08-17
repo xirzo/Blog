@@ -4,14 +4,15 @@
     --color-primary: #242424;
     --color-primary-hover: #373636;
     --color-secondary: #1a1a1a;
-    --color-accent: #faf9f6;
+    --color-primary-text: #faf9f6;
+    --color-secondary-text: #e7e5e1;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: var(--color-accent);
+    color: var(--color-primary-text);
     background-color: var(--color-primary);
 
     font-synthesis: none;
@@ -19,7 +20,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    max-width: 1280px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
@@ -27,7 +28,6 @@
 
 a {
     font-weight: 500;
-    color: #646cff;
     text-decoration: inherit;
 }
 
@@ -43,12 +43,13 @@ body {
 
 @media (prefers-color-scheme: light) {
     :root {
-        --color-primary: #faf9f6;
+        --color-primary: hsl(35, 30%, 96%);
         --color-primary-hover: #f4f4f4;
         --color-secondary: #ebebeb;
-        --color-accent: #242424;
+        --color-primary-text: #222;
+        --color-secondary-text: #bdbdbd;
 
-        color: var(--color-accent);
+        color: var(--color-primary-text);
         background-color: var(--color-primary);
     }
 }
