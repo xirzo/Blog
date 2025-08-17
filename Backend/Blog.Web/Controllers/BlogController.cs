@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Blog.Web.Controllers;
 
 [ApiController]
-[Route("blog")]
+[Route("blogs")]
 public class BlogController : ControllerBase
 {
     private readonly IBlogRepository _repository;
