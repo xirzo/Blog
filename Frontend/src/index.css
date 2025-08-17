@@ -10,6 +10,7 @@
     --color-secondary-text: #e7e5e1;
     --color-link: #2a99cc;
     --color-link-hover: #257ba2;
+    --color-error: #bf2c2c;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

@@ -4,11 +4,13 @@ import type {Blog} from "../../entities/model/blog.ts";
 import {getBlogsByUser} from "../../entities/api/getBlogsByUser.ts";
 import {deleteBlog} from "../../entities/api/deleteBlog.ts";
 import Button from "../../shared/ui/button.tsx";
+import {useNavigate} from "react-router-dom";
 
 function ProfilePage() {
     const {user} = useAuth();
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [areBlogsLoading, setAreBlogsLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchBlogs() {
@@ -42,7 +44,7 @@ function ProfilePage() {
 
                                 <h1>{blog.name}</h1>
 
-                                <Button>Edit</Button>
+                                <Button onClick={() => navigate(`/blog/edit/${blog.id.toString()}`)}>Edit</Button>
                                 <Button onClick={() => deleteBlog(blog.id)}>Delete</Button>
                             </div>
                         ))
