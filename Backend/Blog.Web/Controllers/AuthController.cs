@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
             PasswordHash = passwordHash,
         };
 
-    await _userRepository.AddAsync(user);
+        await _userRepository.AddAsync(user);
 
         return Ok(new { user.Id, user.Name, user.Email });
     }

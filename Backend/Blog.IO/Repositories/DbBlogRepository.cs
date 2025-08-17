@@ -6,26 +6,74 @@ namespace Blog.IO.Repositories;
 
 public class DbBlogRepository(BlogDbContext context) : IBlogRepository
 {
-    private readonly BlogDbContext _context = context;
-
-    public async Task<Core.Entities.Blog?> AddAsync(Core.Entities.Blog blog)
+    public async Task<Core.Entities.Blog?> CreateAsync(Core.Entities.Blog blog)
     {
-        _context.Blogs.Add(blog);
-        await _context.SaveChangesAsync();
+        context.Blogs.Add(blog);
+        await context.SaveChangesAsync();
         return blog;
     }
 
     public async Task<Core.Entities.Blog[]> GetAllAsync()
     {
-        return await _context.Blogs
+        return await context.Blogs
             .Include(blog => blog.Author)
             .ToArrayAsync();
     }
 
-    public async Task<Core.Entities.Blog?> GetById(Guid id)
+    public async Task<Core.Entities.Blog?> GetByIdAsync(Guid id)
     {
-        return await _context.Blogs
+        return await context.Blogs
             .Include(blog => blog.Author)
             .FirstOrDefaultAsync(blog => blog.Id == id);
+    }
+
+    public async Task<Core.Entities.Blog[]> GetByUserIdAsync(Guid userId)
+    {
+        return await context.Blogs.
+            Include(blog => blog.Author)
+            .Where(blog => blog.Author != null && blog.Author.Id == userId)
+            .ToArrayAsync();
+    }
+
+    public async Task<bool> DeleteByIdAsync(Guid id)
+    {
+        var blog = await context.FindAsync<Core.Entities.Blog>(id);
+
+        if (blog == null)
+        {
+            return false;
+        }
+
+        context.Blogs.Remove(blog);
+        await context.SaveChangesAsync();
+        return true;
+    }
+    
+    public async Task<Core.Entities.Blog?> UpdateAsync(Guid id, string? name, string? description, string? markdownContent)
+    {
+        var blog = context.Blogs.FirstOrDefault(blog => blog.Id == id);
+
+        if (blog == null)
+        {
+            return null;
+        }
+        
+        if (name != null)
+        {
+            blog.Name = name;
+        }
+
+        if (description != null)
+        {
+            blog.Description = description;
+        }
+
+        if (markdownContent != null)
+        {
+            blog.MarkdownContent = markdownContent;
+        }
+        
+        await context.SaveChangesAsync();
+        return blog;
     }
 }

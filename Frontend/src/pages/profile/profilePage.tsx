@@ -1,23 +1,75 @@
-import { useAuth } from "../../features/auth/model/useAuth";
+import {useAuth} from "../../features/auth/model/useAuth";
+import {useEffect, useState} from "react";
+import type {Blog} from "../../entities/model/blog.ts";
+import {getBlogsByUser} from "../../entities/api/getBlogsByUser.ts";
+import Button from "../../shared/ui/button.tsx";
+import {useNavigate} from "react-router-dom";
+import {deleteBlog} from "../../entities/api/deleteBlog.ts";
 
 function ProfilePage() {
-  const { user } = useAuth();
+    const {user} = useAuth();
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [areBlogsLoading, setAreBlogsLoading] = useState(false);
+    const navigate = useNavigate();
 
-  return (
-    <div className="profile-page">
-      <h1>Profile</h1>
-      
-      {user && (
-        <div className="profile-card">
-          <div className="profile-info">
-            <h2>{user.name}</h2>
-            <p className="email">{user.email}</p>
-            <p className="user-id">ID: {user.id.toString()}</p>
-          </div>
+    async function fetchBlogs() {
+        try {
+            setAreBlogsLoading(true);
+            const blogsData = await getBlogsByUser(user.id);
+            setBlogs(blogsData);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setAreBlogsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
+
+    async function handleDeletion(blogId: string) {
+        try {
+            await deleteBlog(blogId);
+            fetchBlogs();
+        } catch (err) {
+            console.error("Failed to delete blog:", err);
+        }
+    }
+
+    if (areBlogsLoading) {
+        return <p>Loading...</p>;
+    }
+
+    return (
+        <div className="profile-page">
+            <h2 className={"text-2xl mb-5"}>Blogs</h2>
+            <div className={"gap-5 flex flex-col mb-5"}>
+                {blogs.length > 0 ? (
+                    blogs.map((blog) => (
+                        <div key={blog.id.toString()}
+                             className={"flex flex-row text-start items-center gap-4"}>
+                            <h1>{blog.name}</h1>
+                            <Button onClick={() => navigate(`/blog/edit/${blog.id.toString()}`)}>Edit</Button>
+                            <Button onClick={() => handleDeletion(blog.id.toString())}>Delete</Button>
+                        </div>
+                    ))
+                ) : (
+                    <p>No blogs</p>
+                )}
+                <Button onClick={() => navigate(`/blog/create`)}>Create</Button>
+            </div>
+            {user && (
+                <div className="profile-card">
+                    <div className="profile-info">
+                        <h2>{user.name}</h2>
+                        <p className="email">{user.email}</p>
+                        <p className="user-id">ID: {user.id.toString()}</p>
+                    </div>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
 export default ProfilePage;

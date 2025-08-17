@@ -3,6 +3,8 @@ import BlogPage from "../pages/blog/blogPage";
 import LoginPage from "../pages/login/loginPage";
 import ProfilePage from "../pages/profile/profilePage";
 import RegisterPage from "../pages/register/registerPage";
+import BlogEditPage from "../pages/blogEdit/blogEditPage";
+import BlogCreatePage from "../pages/blogCreate/blogCreatePage.tsx";
 
 export const publicRoutes = [
     {name: "Blogs", path: "/", element: <BlogsPage/>},
@@ -16,6 +18,8 @@ export const publicOnlyRoutes = [
 
 export const protectedRoutes = [
     {name: "Profile", path: "/profile", element: <ProfilePage/>},
+    {name: "Blog Edit", path: "/blog/edit/:id", element: <BlogEditPage/>},
+    {name: "Blog Create", path: "/blog/create", element: <BlogCreatePage/>},
 ];
 
 export const allRoutes = [
