@@ -5,6 +5,7 @@ import {getBlog} from "../../entities/user/api/getBlog";
 import {Guid} from "guid-typescript";
 import HorizontalLine from "../../shared/ui/horizontalLine.tsx";
 import FormattedDate from "../../shared/ui/formattedDate.tsx";
+import Markdown from 'https://esm.sh/react-markdown@10'
 
 function BlogPage() {
     const {id} = useParams<{ id: string }>();
@@ -59,7 +60,9 @@ function BlogPage() {
             <HorizontalLine/>
 
             <article className={"text-lg"}>
-                {blog.htmlContent}
+                <Markdown>
+                    {blog.markdownContent}
+                </Markdown>
             </article>
         </div>
     );

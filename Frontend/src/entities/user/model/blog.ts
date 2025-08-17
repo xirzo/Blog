@@ -5,7 +5,7 @@ export type Blog = {
     id: Guid;
     name: string;
     description: string;
-    htmlContent: string;
+    markdownContent: string;
     created: Date;
     authorId: Guid;
     author?: User;
