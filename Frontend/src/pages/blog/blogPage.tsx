@@ -43,7 +43,7 @@ function BlogPage() {
 
     return (
         <div>
-            <Link to="/blogs"> ← Back to all blogs</Link>
+            <Link to="/"> ← Back to all blogs</Link>
 
             <h1>{blog.name}</h1>
 
