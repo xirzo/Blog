@@ -59,7 +59,7 @@ function PostPage() {
 
             <HorizontalLine/>
 
-            <article className="prose-xl">
+            <article className="prose prose-xl">
                 <Markdown>
                     {post.markdownContent}
                 </Markdown>

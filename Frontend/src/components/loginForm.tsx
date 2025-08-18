@@ -14,7 +14,7 @@ export function LoginForm() {
             className={"flex flex-col gap-5"}
             onSubmit={e => {
                 e.preventDefault();
-                login(email, password).then(r => navigate('/'));
+                login(email, password).then(() => navigate('/'));
             }}>
             <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password"/>

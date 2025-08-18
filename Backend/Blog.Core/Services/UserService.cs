@@ -5,14 +5,14 @@ namespace Blog.Core.Services;
 
 public abstract record RegisterResult
 {
-    public record Success(string User) : RegisterResult;
+    public record Success(User user) : RegisterResult;
     public record UserAlreadyExists(string Message) : RegisterResult;
     public record UserRepositoryError(string Message) : RegisterResult;
 }
 
 public abstract record LoginResult
 {
-    public record Success(string Token) : LoginResult;
+    public record Success(string Token, User user) : LoginResult;
     public record WrongPassword(string Message) : LoginResult;
     public record UserNotFound(string Message) : LoginResult;
 }
@@ -54,7 +54,7 @@ public class UserService
             return new RegisterResult.UserRepositoryError("Failed to add user to the repository.");
         }
 
-        return new RegisterResult.Success("User registered successfully.");
+        return new RegisterResult.Success(addedUser);
     }
 
     public async Task<LoginResult> Login(string email, string password)
@@ -73,6 +73,6 @@ public class UserService
 
         var token = _jwtService.GenerateJwtToken(user);
 
-        return new LoginResult.Success(token);
+        return new LoginResult.Success(token, user);
     }
 }
