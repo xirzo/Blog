@@ -1,9 +1,22 @@
 import {Link} from "react-router-dom";
 import {useAuth} from "../features/auth/model/useAuth.ts";
 import {navigationItems} from "../app/routes.tsx";
+import React, {useEffect, useState} from "react";
 
 function Navbar() {
     const {user, isAuthenticated, logout} = useAuth();
+
+    const logoText = import.meta.env.VITE_LOGO_TEXT;
+    const [visibleCount, setVisibleCount] = useState(0);
+
+    useEffect(() => {
+        if (visibleCount < logoText.length) {
+            const timeout = setTimeout(() => {
+                setVisibleCount(visibleCount + 1);
+            }, 175);
+            return () => clearTimeout(timeout);
+        }
+    }, [visibleCount, logoText.length]);
 
     return (
         <nav
@@ -27,8 +40,12 @@ function Navbar() {
         >
             <div>
                 <Link to="/"
-                      className="text-xl font-bold text-[var(--color-primary-text)] hover:text-[var(--color-primary)] transition-colors">
-                    MyBlog
+                      className="text-xl font-bold text-[var(--color-primary-text)] hover:text-[var(--color-primary)] transition-colors"
+                >
+                    <span>
+                        {logoText.slice(0, visibleCount)}
+                        <span style={{visibility: visibleCount < logoText.length ? "visible" : "hidden"}}>|</span>
+                    </span>
                 </Link>
             </div>
 
