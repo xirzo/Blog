@@ -14,7 +14,7 @@ public class JwtService
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("name", user.Name)
+            new Claim(ClaimTypes.NameIdentifier, user.Name),
         };
         var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
 
