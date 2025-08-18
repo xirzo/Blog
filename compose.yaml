@@ -1,5 +1,6 @@
 ﻿services:
   blog-backend:
+    container_name: blog_backend
     image: blog-backend
     build:
       context: ./Backend
@@ -16,6 +17,7 @@
       - blog-network
       
   blog-frontend:
+    container_name: blog_frontend
     build:
       context: ./Frontend
       dockerfile: Dockerfile
