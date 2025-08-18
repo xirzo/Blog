@@ -2,12 +2,27 @@
 
 @plugin "@tailwindcss/typography";
 
-:root {
+html[data-theme="light"] {
+    --color-primary: hsl(35, 30%, 96%);
+    --color-primary-hover: #f4f4f4;
+    --color-secondary: hsl(36, 16%, 94%);
+    --color-primary-text: #222;
+    --color-secondary-text: #bdbdbd;
+    color: var(--color-primary-text);
+    background-color: var(--color-primary);
+}
+
+html[data-theme="dark"] {
     --color-primary: #242424;
     --color-primary-hover: #373636;
     --color-secondary: #1a1a1a;
     --color-primary-text: #faf9f6;
     --color-secondary-text: #e7e5e1;
+    color: var(--color-primary-text);
+    background-color: var(--color-primary);
+}
+
+:root {
     --color-link: #2a99cc;
     --color-link-hover: #257ba2;
     --color-error: #bf2c2c;
@@ -17,9 +32,6 @@
     font-weight: 400;
 
     color-scheme: light dark;
-    color: var(--color-primary-text);
-    background-color: var(--color-primary);
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -45,17 +57,4 @@ body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --color-primary: hsl(35, 30%, 96%);
-        --color-primary-hover: #f4f4f4;
-        --color-secondary: hsl(36, 16%, 94%);
-        --color-primary-text: #222;
-        --color-secondary-text: #bdbdbd;
-
-        color: var(--color-primary-text);
-        background-color: var(--color-primary);
-    }
 }
