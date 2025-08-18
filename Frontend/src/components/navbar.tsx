@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {useAuth} from "../features/auth/model/useAuth.ts";
 import {navigationItems} from "../app/routes.tsx";
 import React, {useEffect, useState} from "react";
+import ThemeToggle from "./themeToggle.tsx";
 
 function Navbar() {
     const {user, isAuthenticated, logout} = useAuth();
@@ -34,8 +35,6 @@ function Navbar() {
                 z-[100]
                 static
                 top-0
-                transition-colors
-                duration-200
             "
         >
             <div>
@@ -177,6 +176,8 @@ function Navbar() {
                         </li>
                     </>
                 )}
+
+                <ThemeToggle/>
             </ul>
         </nav>
     );
