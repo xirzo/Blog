@@ -47,7 +47,7 @@ function PostPage() {
 
     return (
         <div className={"flex flex-col text-start"}>
-            <Link to="/"> Back to all posts←</Link>
+            <Link to="/"> ← Back to all posts</Link>
 
             <h1 className="font-light text-[10vw] md:text-[3vw] mb-4 text-[var(--color-primary-text)]">{post.name}</h1>
 
