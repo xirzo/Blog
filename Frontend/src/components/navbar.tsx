@@ -65,7 +65,6 @@ function Navbar() {
                                 no-underline
                                 text-[var(--color-primary-text)]
                                 bg-transparent
-                                hover:bg-[var(--color-primary-text)]
                                 hover:text-[var(--color-secondary)]
                                 active:bg-[var(--color-primary-text)]
                                 active:text-[var(--color-secondary)]
@@ -99,7 +98,6 @@ function Navbar() {
                                         no-underline
                                         text-[var(--color-primary-text)]
                                         bg-transparent
-                                        hover:bg-[var(--color-primary-text)]
                                         hover:text-[var(--color-secondary)]
                                         active:bg-[var(--color-primary-text)]
                                         active:text-[var(--color-secondary)]
@@ -125,7 +123,6 @@ function Navbar() {
                                     text-[var(--color-link)]
                                     bg-transparent
                                     hover:cursor-pointer
-                                    hover:bg-[var(--color-primary-text)]
                                     hover:text-[var(--color-link-hover)]
                                     border-none
                                     outline-none
@@ -152,7 +149,6 @@ function Navbar() {
                                     no-underline
                                     text-[var(--color-primary-text)]
                                     bg-transparent
-                                    hover:bg-[var(--color-primary-text)]
                                     hover:text-[var(--color-secondary)]
                                 "
                             >
@@ -173,7 +169,6 @@ function Navbar() {
                                     no-underline
                                     text-[var(--color-primary-text)]
                                     bg-transparent
-                                    hover:bg-[var(--color-primary-text)]
                                     hover:text-[var(--color-secondary)]
                                 "
                             >
