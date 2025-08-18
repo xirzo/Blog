@@ -113,9 +113,6 @@ function Navbar() {
 
                 {isAuthenticated ? (
                     <>
-                        <li className="user-info m-0 p-0 text-[var(--color-primary-text)]">
-                            <span>Hello, {user?.name}</span>
-                        </li>
                         <li className="m-0 p-0">
                             <button
                                 className="
@@ -125,10 +122,11 @@ function Navbar() {
                                     font-medium
                                     transition-colors
                                     duration-150
-                                    text-[var(--color-primary-text)]
+                                    text-[var(--color-link)]
                                     bg-transparent
+                                    hover:cursor-pointer
                                     hover:bg-[var(--color-primary-text)]
-                                    hover:text-[var(--color-secondary)]
+                                    hover:text-[var(--color-link-hover)]
                                     border-none
                                     outline-none
                                 "
