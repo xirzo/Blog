@@ -29,4 +29,16 @@ public class DbUserRepository(BlogDbContext context) : IUserRepository
     {
         return await context.Users.FirstOrDefaultAsync(user => user.Email == email);
     }
+    
+    public async Task<ICollection<string>?> FindPermissionsById(Guid id)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        
+        if (user == null)
+        {
+            return null;
+        }
+        
+        return user.Permissions;
+    }
 }
