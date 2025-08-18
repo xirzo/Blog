@@ -27,7 +27,7 @@ public class AuthController : ControllerBase
 
         return result switch
         {
-            RegisterResult.Success success => Ok(new {success.user.Id, success.user.Name, success.user.Email}),
+            RegisterResult.Success success => Ok(new {success.User.Id, success.User.Name, success.User.Email}),
             RegisterResult.UserAlreadyExists userAlreadyExists => Conflict(new { message = userAlreadyExists.Message }),
             RegisterResult.UserRepositoryError userRepositoryError => BadRequest(new { message = userRepositoryError.Message }),
             _ => BadRequest()
@@ -41,7 +41,7 @@ public class AuthController : ControllerBase
 
         return result switch
         {
-            LoginResult.Success success=> Ok(new { success.Token, user = new {success.user.Id, success.user.Name, success.user.Email}}),
+            LoginResult.Success success=> Ok(new { success.Token, user = new {success.User.Id, success.User.Name, success.User.Email}}),
             LoginResult.UserNotFound userNotFound => NotFound(new { message = userNotFound.Message }),
             LoginResult.WrongPassword wrongPassword => Unauthorized(new { message = wrongPassword.Message }),
             _ => BadRequest()

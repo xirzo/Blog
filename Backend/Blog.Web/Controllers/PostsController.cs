@@ -1,5 +1,6 @@
 using Blog.Core.UseCases;
 using Blog.Web.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Web.Controllers;
@@ -35,6 +36,7 @@ public class PostsController : ControllerBase
     
     
     [HttpDelete("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteById(Guid id)
     {
         var isDeleted = await _repository.DeleteByIdAsync(id);
@@ -48,6 +50,7 @@ public class PostsController : ControllerBase
     }
     
     [HttpPut("{id:guid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateById(Guid id, [FromBody] BlogUpdateDto dto)
     {
         var blog =  await _repository.UpdateAsync(id, dto.Name, dto.Description, dto.MarkdownContent);
@@ -62,6 +65,7 @@ public class PostsController : ControllerBase
     
     
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] BlogCreateDto dto)
     {
         var blog = new Core.Entities.Post

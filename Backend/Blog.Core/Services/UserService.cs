@@ -5,14 +5,14 @@ namespace Blog.Core.Services;
 
 public abstract record RegisterResult
 {
-    public record Success(User user) : RegisterResult;
+    public record Success(User User) : RegisterResult;
     public record UserAlreadyExists(string Message) : RegisterResult;
     public record UserRepositoryError(string Message) : RegisterResult;
 }
 
 public abstract record LoginResult
 {
-    public record Success(string Token, User user) : LoginResult;
+    public record Success(string Token, User User) : LoginResult;
     public record WrongPassword(string Message) : LoginResult;
     public record UserNotFound(string Message) : LoginResult;
 }
