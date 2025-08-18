@@ -6,6 +6,7 @@ import {Guid} from "guid-typescript";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import FormattedDate from "../shared/ui/formattedDate.tsx";
 import Markdown from 'https://esm.sh/react-markdown@10'
+import remarkGfm from "remark-gfm";
 
 function PostPage() {
     const {id} = useParams<{ id: string }>();
@@ -59,8 +60,24 @@ function PostPage() {
 
             <HorizontalLine/>
 
-            <article className="prose prose-xl">
-                <Markdown>
+            <article className="
+                prose
+                prose-xl
+                prose-ul:text-[var(--color-primary-text)]
+                prose-li:text-[var(--color-primary-text)]
+                prose-ul:text-[var(--color-primary-text)]
+                prose-ol:text-[var(--color-primary-text)]
+                prose-tr:text-[var(--color-primary-text)]
+                prose-th:text-[var(--color-primary-text)]
+                prose-td:text-[var(--color-primary-text)]
+                prose-hr:text-[var(--color-primary-text)]
+                prose-code:text-[var(--color-secondary-text)]
+                prose-strong:text-[var(--color-secondary-text)]
+                prose-pre:bg-[var(--color-secondary)]
+                prose-headings:text-[var(--color-primary-text)]
+                prose-p:text-[var(--color-primary-text)]
+            ">
+                <Markdown remarkPlugins={[remarkGfm]}>
                     {post.markdownContent}
                 </Markdown>
             </article>
