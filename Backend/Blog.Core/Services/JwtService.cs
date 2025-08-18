@@ -12,9 +12,9 @@ public class JwtService
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim("guid", user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(ClaimTypes.NameIdentifier, user.Name),
+            new Claim("name", user.Name),
         };
         var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
 

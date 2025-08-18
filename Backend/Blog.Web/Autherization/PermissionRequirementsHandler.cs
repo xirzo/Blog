@@ -9,13 +9,20 @@ public class PermissionRequirementsHandler(IServiceScopeFactory serviceScopeFact
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirements requirement)
     {
         var userId = context.User.Claims
-            .FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
-        
-        if (userId == null || !Guid.TryParse(userId.Value, out var userGuid))
+            .FirstOrDefault(x => x.Type == "guid");
+
+        if (userId == null)
         {
+            Console.WriteLine("No valid user ID found");
             return;
         }
         
+        if (!Guid.TryParse(userId.Value, out var userGuid))
+        {
+            Console.WriteLine("Failed to parse user ID as GUID");
+            return;
+        }
+
         using var scope = serviceScopeFactory.CreateScope();
         var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
         var permissions = await userRepository.FindPermissionsById(userGuid);
