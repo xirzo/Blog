@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Blog.Core.Entities;
+using Blog.Core.Services;
 using Blog.Core.UseCases;
 
 namespace Blog.Web.Controllers;
@@ -13,77 +14,37 @@ namespace Blog.Web.Controllers;
 [Route("auth")]
 public class AuthController : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
-    public AuthController(IUserRepository userRepository)
+    private readonly UserService _userService;
+    public AuthController(UserService userService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
-        var existingUser = await _userRepository.FindByEmailAsync(dto.Email);
+        RegisterResult result = await _userService.Register(dto.Name, dto.Email, dto.Password);
 
-        if (existingUser != null)
+        return result switch
         {
-            return BadRequest("Email already registered");
-        }
-
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-
-        var user = new User
-        { 
-            Id = Guid.NewGuid(),
-            Name = dto.Name,
-            Email = dto.Email,
-            PasswordHash = passwordHash,
+            RegisterResult.Success success => Ok(success),
+            RegisterResult.UserAlreadyExists userAlreadyExists => Conflict(new { message = userAlreadyExists.Message }),
+            RegisterResult.UserRepositoryError userRepositoryError => BadRequest(new { message = userRepositoryError.Message }),
+            _ => BadRequest()
         };
-
-        await _userRepository.AddAsync(user);
-
-        return Ok(new { user.Id, user.Name, user.Email });
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
-        var user = await _userRepository.FindByEmailAsync(dto.Email);
+        LoginResult result = await _userService.Login(dto.Email, dto.Password);
 
-        if (user == null)
+        return result switch
         {
-            return Unauthorized("User not found");
-        }
-
-        if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-        {
-            return Unauthorized("Invalid password");
-        }
-
-        var token = GenerateJwtToken(user);
-
-        return Ok(new { token, user = new { user.Id, user.Name, user.Email } });
-    }
-
-    private string GenerateJwtToken(User user)
-    {
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("name", user.Name)
+            LoginResult.Success token => Ok(new { token }),
+            LoginResult.UserNotFound userNotFound => NotFound(new { message = userNotFound.Message }),
+            LoginResult.WrongPassword wrongPassword => Unauthorized(new { message = wrongPassword.Message }),
+            _ => BadRequest()
         };
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var token = new JwtSecurityToken(
-            issuer: Environment.GetEnvironmentVariable("JWT_ISSUER"),
-            audience: Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(2),
-            signingCredentials: credentials
-        );
-        
-        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

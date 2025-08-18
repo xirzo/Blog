@@ -1,4 +1,5 @@
 using System.Net;
+using Blog.Core.Services;
 using Blog.Core.UseCases;
 using Blog.IO.Extensions;
 using Blog.IO.Repositories;
@@ -14,6 +15,8 @@ builder.Services.AddDatabase();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 builder.Services.AddScoped<IPostRepository, DbPostRepository>();
+builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<UserService>();
 
 var allowedOrigin = builder.Configuration["FrontendOrigin"] ?? "http://localhost:3000";
 
