@@ -5,11 +5,13 @@ using System.Text;
 using Blog.Core.Entities;
 using Blog.Core.Services;
 using Blog.Core.UseCases;
+using Blog.IO.Db;
 using Blog.IO.Extensions;
 using Blog.IO.Repositories;
 using Blog.Web.Autherization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
@@ -87,5 +89,11 @@ app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
