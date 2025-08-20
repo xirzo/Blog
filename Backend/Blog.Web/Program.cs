@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Blog.Core.Entities;
+using Blog.Core.Helpers;
 using Blog.Core.Services;
 using Blog.Core.UseCases;
 using Blog.IO.Db;
@@ -26,7 +27,7 @@ builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionRequirementsHandler>();
 
-var allowedOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
+var allowedOrigin = EnvironmentHelper.GetEnvironmentVariableOrFile("FRONTEND_ORIGIN");
 
 if (string.IsNullOrWhiteSpace(allowedOrigin))
 {
@@ -48,9 +49,10 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
-        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
-        var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-        var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+        var jwtKey = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_KEY");
+        var jwtIssuer = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_ISSUER");
+        var jwtAudience = EnvironmentHelper.GetEnvironmentVariableOrFile("JWT_AUDIENCE");
+
 
         Debug.Assert(jwtKey != null, nameof(jwtKey) + " != null");
 

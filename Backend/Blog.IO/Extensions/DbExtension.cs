@@ -1,3 +1,4 @@
+using Blog.Core.Helpers;
 using Blog.IO.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,8 +12,7 @@ public static class DbExtension
     {
         services.AddDbContext<BlogDbContext>((serviceProvider, options) =>
         {
-            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            var connectionString = EnvironmentHelper.GetEnvironmentVariableOrFile("DB_CONNECTION_STRING");
 
             if (string.IsNullOrWhiteSpace(connectionString))
             {

@@ -1,3 +1,4 @@
+using Blog.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +17,7 @@ public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
 
         var optionsBuilder = new DbContextOptionsBuilder<BlogDbContext>();
 
-        var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+        var connectionString = EnvironmentHelper.GetEnvironmentVariableOrFile("DB_CONNECTION_STRING");
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {

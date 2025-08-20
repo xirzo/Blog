@@ -16,3 +16,31 @@ cp frontend.env Frontend/.env
 docker-compose build
 docker-compose up -d
 ```
+
+
+## Deploy on server
+
+Create context to execute **Docker** commands as if you were on VPS.
+```sh
+docker context create blog --host=ssh;://<username>@<ip>
+```
+
+Use that context.
+```sh
+docker context use blog
+```
+
+```sh
+docker swarm init
+```
+
+Add secrets
+```sh
+echo "PUT_STRING_HERE" | docker secret create DB_CONNECTION_STRING -
+```
+
+Deploy to the VPS
+
+```sh
+docker stack deploy blog -c docker-stack.yaml --with-registry-auth
+```
