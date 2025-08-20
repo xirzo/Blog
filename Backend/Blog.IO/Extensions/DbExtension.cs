@@ -12,7 +12,13 @@ public static class DbExtension
         services.AddDbContext<BlogDbContext>((serviceProvider, options) =>
         {
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException("Connection string env is not set (DB_CONNECTION_STRING)");
+            }
+
 
             options.UseNpgsql(connectionString);
         });

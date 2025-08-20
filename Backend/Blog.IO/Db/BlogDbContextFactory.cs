@@ -15,10 +15,15 @@ public class BlogDbContextFactory : IDesignTimeDbContextFactory<BlogDbContext>
             .Build();
 
         var optionsBuilder = new DbContextOptionsBuilder<BlogDbContext>();
-            
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException("Connection string env is not set (DB_CONNECTION_STRING)");
+        }
+
         optionsBuilder.UseNpgsql(connectionString);
-            
         return new BlogDbContext(optionsBuilder.Options);
     }
 }
