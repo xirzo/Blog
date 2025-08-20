@@ -20,6 +20,9 @@ docker-compose up -d
 
 ## Deploy on server
 
+> ![WARNING]
+> When building frontend image for production, set ENVs inside of the Dockerfile.
+
 Create context to execute **Docker** commands as if you were on VPS.
 ```sh
 docker context create blog --host=ssh;://<username>@<ip>
