@@ -1,7 +1,6 @@
 using Blog.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace Blog.IO.Db;
 
 public class BlogDbContext(DbContextOptions<BlogDbContext> options) : DbContext(options)
@@ -25,7 +24,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(user => user.Permissions)
             .HasConversion(
                 v => string.Join(',', v),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList());
     }
 }
 
