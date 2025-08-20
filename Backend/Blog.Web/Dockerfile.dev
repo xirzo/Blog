@@ -1,4 +1,24 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:9.0
-WORKDIR /src/Blog.Web
+WORKDIR /workspace
 
-CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5000"]
+COPY ["Blog.sln", "Blog.sln"]
+COPY ["Blog.Web/Blog.Web.csproj", "Blog.Web/"]
+COPY ["Blog.Adapters/Blog.Adapters.csproj", "Blog.Adapters/"]
+COPY ["Blog.IO/Blog.IO.csproj", "Blog.IO/"]
+COPY ["Blog.Core/Blog.Core.csproj", "Blog.Core/"]
+
+RUN dotnet restore "Blog.sln"
+
+COPY . .
+
+WORKDIR /workspace/ISpire.Web
+
+EXPOSE 6123
+
+ENV ASPNETCORE_ENVIRONMENT=Development \
+    ASPNETCORE_URLS=http://0.0.0.0:6123 \
+    DOTNET_USE_POLLING_FILE_WATCHER=1 \
+    DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
+
+ENTRYPOINT ["dotnet", "watch", "run", "--project", "/workspace/Blog.Web/Blog.Web.csproj", "--no-hot-reload"]
+
