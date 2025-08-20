@@ -1,14 +1,13 @@
 ﻿services:
   blog-backend:
-    image: ghcr.io/xirzo/blog-backend:0.0.2
+    image: ghcr.io/xirzo/blog-backend:0.0.7
     secrets:
       - jwt_key
       - jwt_issuer
       - jwt_audience
     ports:
-      - "5000:5000"
+      - "6123:6123"
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
       JWT_KEY: /run/secrets/jwt_key
       JWT_ISSUER: /run/secrets/jwt_issuer
       JWT_AUDIENCE: /run/secrets/jwt_audience
@@ -44,9 +43,9 @@
     ports:
       - "5432:5432" 
     environment:
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_USER: blogger
-      POSTGRES_DB: blogdb
+      POSTGRES_USER: dbuser
+      POSTGRES_DB: dbname
+      POSTGRES_PASSWORD: dbpass
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
