@@ -47,7 +47,7 @@
       POSTGRES_DB: dbname
       POSTGRES_PASSWORD: dbpass
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - blog-network
 
@@ -56,7 +56,7 @@ networks:
     driver: overlay
 
 volumes:
-  postgres_data:
+  db_data:
 
 secrets:
   jwt_key:

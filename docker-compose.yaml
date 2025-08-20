@@ -34,7 +34,7 @@
       - blog-network
 
   db:
-    image: postgres
+    image: postgres:15
     restart: always
     shm_size: 128mb
     ports:
@@ -44,7 +44,7 @@
       POSTGRES_DB: dbname
       POSTGRES_PASSWORD: dbpass
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - blog-network
 
@@ -53,5 +53,5 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  db_data:
   frontend_node_modules:
