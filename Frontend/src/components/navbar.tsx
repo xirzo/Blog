@@ -1,14 +1,19 @@
-import {Link} from "react-router-dom";
-import {useAuth} from "../features/auth/model/useAuth.ts";
-import {navigationItems} from "../app/routes.tsx";
-import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../features/auth/model/useAuth.ts";
+import { navigationItems } from "../app/routes.tsx";
+import { useEffect, useState } from "react";
 import ThemeToggle from "./themeToggle.tsx";
 
 function Navbar() {
-    const {user, isAuthenticated, logout} = useAuth();
+    const { isAuthenticated, logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const logoText = import.meta.env.VITE_LOGO_TEXT;
+
+    if (logoText === undefined) {
+        console.error("Failed to get logoText env");
+    }
+
     const [visibleCount, setVisibleCount] = useState(0);
 
     useEffect(() => {
@@ -44,11 +49,11 @@ function Navbar() {
             <div className="flex justify-between items-center w-full md:w-auto">
                 <div>
                     <Link to="/"
-                          className="text-xl font-bold text-[var(--color-primary-text)] hover:text-[var(--color-primary)] transition-colors"
+                        className="text-xl font-bold text-[var(--color-primary-text)] hover:text-[var(--color-primary)] transition-colors"
                     >
                         <span>
                             {logoText.slice(0, visibleCount)}
-                            <span style={{visibility: visibleCount < logoText.length ? "visible" : "hidden"}}>|</span>
+                            <span style={{ visibility: visibleCount < logoText.length ? "visible" : "hidden" }}>|</span>
                         </span>
                     </Link>
                 </div>
@@ -59,10 +64,10 @@ function Navbar() {
                     aria-label="Toggle menu"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                         className={`bi bi-list transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}
-                         viewBox="0 0 16 16" style={{color: 'var(--color-link)'}}>
+                        className={`bi bi-list transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}
+                        viewBox="0 0 16 16" style={{ color: 'var(--color-link)' }}>
                         <path fillRule="evenodd"
-                              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                     </svg>
                 </button>
             </div>
@@ -86,7 +91,7 @@ function Navbar() {
                 w-full
                 md:w-auto
             `}>
-                {navigationItems.filter(item => item.path === "/" || item.path === "/posts").map(({name, path}) => (
+                {navigationItems.filter(item => item.path === "/" || item.path === "/posts").map(({ name, path }) => (
                     <li key={path} className="m-0 p-0">
                         <Link
                             to={path}
@@ -122,7 +127,7 @@ function Navbar() {
                             item.path !== "/login" &&
                             item.path !== "/register"
                         )
-                        .map(({name, path}) => (
+                        .map(({ name, path }) => (
                             <li key={path} className="m-0 p-0">
                                 <Link
                                     to={path}
@@ -234,7 +239,7 @@ function Navbar() {
                 )}
 
                 <li className="m-0 p-0 flex justify-center md:justify-start">
-                    <ThemeToggle/>
+                    <ThemeToggle />
                 </li>
             </ul>
         </nav>

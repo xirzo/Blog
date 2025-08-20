@@ -1,15 +1,15 @@
-import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
-import type {Post} from "../entities/model/post.ts";
-import {getPost} from "../entities/api/getPost.ts";
-import {Guid} from "guid-typescript";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import type { Post } from "../entities/model/post.ts";
+import { getPost } from "../entities/api/getPost.ts";
+import { Guid } from "guid-typescript";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import FormattedDate from "../shared/ui/formattedDate.tsx";
-import Markdown from 'https://esm.sh/react-markdown@10'
 import remarkGfm from "remark-gfm";
+import Markdown from "react-markdown";
 
 function PostPage() {
-    const {id} = useParams<{ id: string }>();
+    const { id } = useParams<{ id: string }>();
     const [post, setPost] = useState<Post | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -54,11 +54,11 @@ function PostPage() {
             <p className={"font-light mb-2 text-[var(--color-secondary-text)] mb-8"}>{post.description}</p>
 
             <p className={"font-light mb-2 text-[var(--color-secondary-text)]"}>
-                <FormattedDate date={post.created}/>
+                <FormattedDate date={post.created} />
                 {post.author && <span> by {post.author.name}</span>}
             </p>
 
-            <HorizontalLine/>
+            <HorizontalLine />
 
             <article className="
                 prose

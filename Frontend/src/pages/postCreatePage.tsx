@@ -1,8 +1,8 @@
-import {useState} from "react";
+import { useState } from "react";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import Button from "../shared/ui/button.tsx";
-import {createPost} from "../entities/api/createPost.ts";
-import {useAuth} from "../features/auth/model/useAuth.ts";
+import { createPost } from "../entities/api/createPost.ts";
+import { useAuth } from "../features/auth/model/useAuth.ts";
 
 function PostCreatePage() {
     const [name, setName] = useState("");
@@ -17,6 +17,11 @@ function PostCreatePage() {
         setSaveError(null);
 
         try {
+            if (authContext.user === null) {
+                console.error("AuthContext user is null");
+                return;
+            }
+
             await createPost({
                 name,
                 description,
@@ -37,7 +42,7 @@ function PostCreatePage() {
     return (
         <div className={"flex flex-col text-start gap-5"}>
             <h1 className={"text-4xl"}>Create Post</h1>
-            <HorizontalLine bottomMargin={2}/>
+            <HorizontalLine bottomMargin={2} />
 
             <h2 className={"text-xl"}>Name</h2>
             <input

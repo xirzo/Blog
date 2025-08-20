@@ -1,13 +1,14 @@
-import {useAuth} from "../features/auth/model/useAuth.ts";
-import {useEffect, useState} from "react";
-import type {Post} from "../entities/model/post.ts";
-import {getPostsByUser} from "../entities/api/getPostsByUser.ts";
+import { useAuth } from "../features/auth/model/useAuth.ts";
+import { useEffect, useState } from "react";
+import type { Post } from "../entities/model/post.ts";
+import { getPostsByUser } from "../entities/api/getPostsByUser.ts";
 import Button from "../shared/ui/button.tsx";
-import {useNavigate} from "react-router-dom";
-import {deletePost} from "../entities/api/deletePost.ts";
+import { useNavigate } from "react-router-dom";
+import { deletePost } from "../entities/api/deletePost.ts";
+import type { Guid } from "guid-typescript";
 
 function ProfilePage() {
-    const {user} = useAuth();
+    const { user } = useAuth();
     const [posts, setPosts] = useState<Post[]>([]);
     const [arePostsLoading, setArePostsLoading] = useState(false);
     const navigate = useNavigate();
@@ -15,6 +16,10 @@ function ProfilePage() {
     async function fetchPosts() {
         try {
             setArePostsLoading(true);
+            if (user === null) {
+                console.error("No user");
+                return;
+            }
             const postsData = await getPostsByUser(user.id);
             setPosts(postsData);
         } catch (err) {
@@ -28,7 +33,7 @@ function ProfilePage() {
         fetchPosts();
     }, []);
 
-    async function handleDeletion(postId: string) {
+    async function handleDeletion(postId: Guid) {
         try {
             await deletePost(postId);
             fetchPosts();
@@ -48,10 +53,10 @@ function ProfilePage() {
                 {posts.length > 0 ? (
                     posts.map((post) => (
                         <div key={post.id.toString()}
-                             className={"flex flex-row text-start items-center gap-4"}>
+                            className={"flex flex-row text-start items-center gap-4"}>
                             <h1>{post.name}</h1>
                             <Button onClick={() => navigate(`/post/edit/${post.id.toString()}`)}>Edit</Button>
-                            <Button onClick={() => handleDeletion(post.id.toString())}>Delete</Button>
+                            <Button onClick={() => handleDeletion(post.id)}>Delete</Button>
                         </div>
                     ))
                 ) : (
