@@ -11,7 +11,7 @@ RUN dotnet restore "Blog.sln"
 
 COPY . .
 
-WORKDIR /workspace/ISpire.Web
+WORKDIR /workspace/Blog.Web
 
 EXPOSE 6123
 
