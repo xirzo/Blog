@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Text;
 using Blog.Core.Entities;
 using Blog.Core.Services;
@@ -27,7 +26,12 @@ builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionRequirementsHandler>();
 
-var allowedOrigin = builder.Configuration["FrontendOrigin"] ?? "http://localhost:3000";
+var allowedOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
+
+if (string.IsNullOrWhiteSpace(allowedOrigin))
+{
+    throw new InvalidOperationException("No frontend origin env provided (FRONTEND_ORIGIN)");
+}
 
 builder.Services.AddCors(options =>
 {
@@ -69,11 +73,6 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy(Permissions.Create, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Create)));
     options.AddPolicy(Permissions.Update, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Update)));
     options.AddPolicy(Permissions.Delete, policy => policy.Requirements.Add(new PermissionRequirements(Permissions.Delete)));
-});
-
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    serverOptions.Listen(IPAddress.Any, 5000);
 });
 
 var app = builder.Build();
