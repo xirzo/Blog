@@ -1,14 +1,9 @@
-@import "tailwindcss";
-
-@plugin "@tailwindcss/typography";
-
 html[data-theme="light"] {
     --color-primary: hsl(35, 30%, 96%);
     --color-primary-hover: #f4f4f4;
     --color-secondary: hsl(36, 16%, 94%);
     --color-primary-text: #222;
     --color-secondary-text: #bdbdbd;
-    color: var(--color-primary-text);
     background-color: var(--color-primary);
 }
 
@@ -18,7 +13,6 @@ html[data-theme="dark"] {
     --color-secondary: #1a1a1a;
     --color-primary-text: #faf9f6;
     --color-secondary-text: #e7e5e1;
-    color: var(--color-primary-text);
     background-color: var(--color-primary);
 }
 
@@ -43,6 +37,13 @@ html[data-theme="dark"] {
     text-align: center;
 }
 
+body {
+    color: var(--color-primary-text);
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
 a {
     font-weight: 500;
     color: var(--color-link);
@@ -51,10 +52,4 @@ a {
 
 a:hover {
     color: var(--color-link-hover);
-}
-
-body {
-    margin: 0;
-    min-width: 320px;
-    min-height: 100vh;
 }

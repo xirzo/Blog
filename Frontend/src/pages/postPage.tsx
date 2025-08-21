@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import type { Post } from "../entities/model/post.ts";
-import { getPost } from "../entities/api/getPost.ts";
-import { Guid } from "guid-typescript";
+import {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import type {Post} from "../entities/model/post.ts";
+import {getPost} from "../entities/api/getPost.ts";
+import {Guid} from "guid-typescript";
 import HorizontalLine from "../shared/ui/horizontalLine.tsx";
 import FormattedDate from "../shared/ui/formattedDate.tsx";
 import remarkGfm from "remark-gfm";
 import Markdown from "react-markdown";
 
 function PostPage() {
-    const { id } = useParams<{ id: string }>();
+    const {id} = useParams<{ id: string }>();
     const [post, setPost] = useState<Post | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -46,37 +46,26 @@ function PostPage() {
     }
 
     return (
-        <div className={"flex flex-col text-start"}>
+        <div style={{display: 'flex', flexDirection: 'column', textAlign: 'start'}}>
             <Link to="/"> ← Back to all posts</Link>
 
-            <h1 className="font-light text-[10vw] md:text-[3vw] mb-4 text-[var(--color-primary-text)]">{post.name}</h1>
+            <h1 style={{
+                fontWeight: 300,
+                fontSize: '3vw',
+                marginBottom: 16,
+                color: 'var(--color-primary-text)'
+            }}>{post.name}</h1>
 
-            <p className={"font-light mb-2 text-[var(--color-secondary-text)] mb-8"}>{post.description}</p>
+            <p style={{fontWeight: 300, marginBottom: 8, color: 'var(--color-secondary-text)'}}>{post.description}</p>
 
-            <p className={"font-light mb-2 text-[var(--color-secondary-text)]"}>
-                <FormattedDate date={post.created} />
+            <p style={{fontWeight: 300, marginBottom: 8, color: 'var(--color-secondary-text)'}}>
+                <FormattedDate date={post.created}/>
                 {post.author && <span> by {post.author.name}</span>}
             </p>
 
-            <HorizontalLine />
+            <HorizontalLine/>
 
-            <article className="
-                prose
-                prose-xl
-                prose-ul:text-[var(--color-primary-text)]
-                prose-li:text-[var(--color-primary-text)]
-                prose-ul:text-[var(--color-primary-text)]
-                prose-ol:text-[var(--color-primary-text)]
-                prose-tr:text-[var(--color-primary-text)]
-                prose-th:text-[var(--color-primary-text)]
-                prose-td:text-[var(--color-primary-text)]
-                prose-hr:text-[var(--color-primary-text)]
-                prose-code:text-[var(--color-secondary-text)]
-                prose-strong:text-[var(--color-secondary-text)]
-                prose-pre:bg-[var(--color-secondary)]
-                prose-headings:text-[var(--color-primary-text)]
-                prose-p:text-[var(--color-primary-text)]
-            ">
+            <article style={{color: 'var(--color-primary-text)'}}>
                 <Markdown remarkPlugins={[remarkGfm]}>
                     {post.markdownContent}
                 </Markdown>

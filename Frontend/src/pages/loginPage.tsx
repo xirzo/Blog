@@ -2,7 +2,7 @@ import {LoginForm} from "../components/loginForm.tsx";
 
 function LoginPage() {
     return (
-        <div className={"m-10 w-1/2 mx-auto"}>
+        <div style={{margin: 40, width: '50%', marginLeft: 'auto', marginRight: 'auto'}}>
             <LoginForm/>
         </div>
     )

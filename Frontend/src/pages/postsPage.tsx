@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import PostMiniature from "../components/postMiniature.tsx";
-import { getAllPosts } from "../entities/api/getAllPosts.ts";
-import type { Post } from "../entities/model/post.ts";
+import {getAllPosts} from "../entities/api/getAllPosts.ts";
+import type {Post} from "../entities/model/post.ts";
 
 function PostsPage() {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -35,7 +35,7 @@ function PostsPage() {
     }
 
     return (
-        <div className={"flex flex-col gap-5"}>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 20}}>
             {posts.length > 0 ? (
                 posts.map((post) => (
                     <PostMiniature

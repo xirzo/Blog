@@ -11,7 +11,6 @@ export function LoginForm() {
 
     return (
         <form
-            className={"flex flex-col gap-5"}
             onSubmit={e => {
                 e.preventDefault();
                 login(email, password).then(() => navigate('/'));

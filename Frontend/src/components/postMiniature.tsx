@@ -28,23 +28,20 @@ function PostMiniature({blodId, name, description, date, maxWordsInDescription, 
     }
 
     return (
-        <div className="
-                p-6 rounded-[15px] bg-[var(--color-secondary)]
-                text-start shadow-[0_2px_4px_rgba(0,0,0,0.1)]
-        ">
+        <div>
             <Link key={blodId + "_title"} to={linkTo}>
-                <h2 className="text-4xl font-light mb-5">
+                <h2>
                     {name}
                 </h2>
             </Link>
 
-            <div className={"mb-3 text-[var(--color-secondary-text)]"}>
+            <div>
                 <FormattedDate date={date}/>
             </div>
 
             <HorizontalLine bottomMargin={3}/>
 
-            <p className="text-[var(--color-secondary-text)] mb-5">
+            <p>
                 {description}
             </p>
 

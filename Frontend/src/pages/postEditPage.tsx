@@ -73,35 +73,34 @@ function PostEditPage() {
     }
 
     return (
-        <div className={"flex flex-col text-start gap-5"}>
-            <h1 className={"text-4xl"}>Edit</h1>
+        <div style={{display: 'flex', flexDirection: 'column', textAlign: 'start', gap: 20}}>
+            <h1 style={{fontSize: '2.25rem'}}>Edit</h1>
             <HorizontalLine bottomMargin={2}/>
 
-            <h2 className={"text-xl"}>Name</h2>
+            <h2 style={{fontSize: '1.25rem'}}>Name</h2>
             <input
                 value={name}
                 onChange={e => setName(e.target.value)}
-                className="border p-2"
+                style={{border: '1px solid #ccc', padding: '8px'}}
             />
 
-            <h2 className={"text-xl"}>Description</h2>
+            <h2 style={{fontSize: '1.25rem'}}>Description</h2>
             <textarea
                 rows={4}
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                className="border p-2"
+                style={{border: '1px solid #ccc', padding: '8px'}}
             />
 
-            <h2 className={"text-xl"}>Content</h2>
-
+            <h2 style={{fontSize: '1.25rem'}}>Content</h2>
             <textarea
                 rows={10}
                 value={markdownContent}
                 onChange={e => setMarkdownContent(e.target.value)}
-                className="border p-2"
+                style={{border: '1px solid #ccc', padding: '8px'}}
             />
 
-            {saveError && <p className="text-[var(--color-error)]">{saveError}</p>}
+            {saveError && <p style={{color: 'var(--color-error)'}}>{saveError}</p>}
 
             <Button onClick={handleSave} disabled={isSaving}>
                 {isSaving ? "Saving..." : "Save"}
