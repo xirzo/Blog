@@ -38,32 +38,9 @@
       restart_policy:
         condition: on-failure
 
-  db:
-    image: postgres:15
-    deploy:
-      restart_policy:
-        condition: on-failure
-    ports:
-      - "5432:5432" 
-    secrets:
-      - dbuser
-      - dbname
-      - dbpass
-    environment:
-      POSTGRES_USER_FILE: /run/secrets/dbuser
-      POSTGRES_DB_FILE: /run/secrets/dbname
-      POSTGRES_PASSWORD_FILE: /run/secrets/dbpass
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    networks:
-      - blog-network
-
 networks:
   blog-network:
     driver: overlay
-
-volumes:
-  db_data:
 
 secrets:
   db_connection_string:
@@ -73,10 +50,4 @@ secrets:
   jwt_issuer:
     external: true
   jwt_audience:
-    external: true
-  dbuser:
-    external: true
-  dbname:
-    external: true
-  dbpass:
     external: true
