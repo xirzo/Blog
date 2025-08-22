@@ -16,24 +16,25 @@ jobs:
       - name: Log in to the GitHub Container Registry
         run: echo "${{ secrets.GH_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build the frontend image
-        run: docker build -f Frontend/Dockerfile -t ghcr.io/xirzo/blog-frontend Frontend
-
-      - name: Push the frontend image
-        run: docker push ghcr.io/xirzo/blog-frontend
-
-      - name: Build the backend image
-        run: docker build -f Backend/Blog.Web/Dockerfile -t ghcr.io/xirzo/blog-backend Backend
-
-      - name: Push the backend image
-        run: docker push ghcr.io/xirzo/blog-backend
 
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.HOST_DOMAIN }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "${{ secrets.HOST_SSH_PORT }}" -H "${{ secrets.HOST_DOMAIN }}" >> ~/.ssh/known_hosts
+
+      - name: Build the frontend image
+        run: docker build -f Frontend/Dockerfile -t ghcr.io/xirzo/blog-frontend:latest Frontend
+
+      - name: Push the frontend image
+        run: docker push ghcr.io/xirzo/blog-frontend:latest
+
+      - name: Build the backend image
+        run: docker build -f Backend/Blog.Web/Dockerfile -t ghcr.io/xirzo/blog-backend:latest Backend
+
+      - name: Push the backend image
+        run: docker push ghcr.io/xirzo/blog-backend:latest
 
       - name: Create context
         run: |
