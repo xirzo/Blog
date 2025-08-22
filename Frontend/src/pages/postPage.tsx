@@ -49,9 +49,9 @@ function PostPage() {
         <div className={"flex flex-col text-start"}>
             <Link to="/"> ← Back to all posts</Link>
 
-            <h1 className="font-light text-[10vw] md:text-[3vw] mb-4 text-[var(--color-primary-text)]">{post.name}</h1>
+            <h1 className="font-light text-[3rem] mb-4 text-[var(--color-primary-text)]">{post.name}</h1>
 
-            <p className={"font-light mb-2 text-[var(--color-secondary-text)] mb-8"}>{post.description}</p>
+            <p className={"font-light text-[var(--color-secondary-text)] mb-8"}>{post.description}</p>
 
             <p className={"font-light mb-2 text-[var(--color-secondary-text)]"}>
                 <FormattedDate date={post.created} />
@@ -63,7 +63,6 @@ function PostPage() {
             <article className="
                 prose
                 prose-xl
-                prose-ul:text-[var(--color-primary-text)]
                 prose-li:text-[var(--color-primary-text)]
                 prose-ul:text-[var(--color-primary-text)]
                 prose-ol:text-[var(--color-primary-text)]
