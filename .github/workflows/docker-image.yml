@@ -16,7 +16,6 @@ jobs:
       - name: Log in to the GitHub Container Registry
         run: echo "${{ secrets.GH_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
@@ -29,9 +28,6 @@ jobs:
           docker context inspect vps || \
           docker context create vps --docker "host=${{ secrets.VPS_SSH_URL }}"
       
-      - name: Use VPS context
-        run: docker context use vps
-
       - name: Build the frontend image
         run: docker build -f Frontend/Dockerfile -t ghcr.io/xirzo/blog-frontend:latest Frontend
 
@@ -43,6 +39,9 @@ jobs:
 
       - name: Push the backend image
         run: docker push ghcr.io/xirzo/blog-backend:latest
-      
+
+      - name: Use VPS context
+        run: docker context use vps
+
       - name: Deploy to VPS
         run: docker stack deploy blog -c docker-stack.yaml --with-registry-auth
