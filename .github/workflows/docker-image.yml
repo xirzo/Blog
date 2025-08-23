@@ -44,4 +44,4 @@ jobs:
         run: docker context use vps
 
       - name: Deploy to VPS
-        run: docker stack deploy blog -c docker-stack.yaml --with-registry-auth
+        run: docker stack deploy blog -c docker-swarm.yaml --with-registry-auth
