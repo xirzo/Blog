@@ -17,10 +17,16 @@
     deploy:
       labels:
         - "traefik.enable=true"
+
         - "traefik.http.routers.blog-backend.rule=Host(`api.xirzo.ru`)"
-        - "traefik.http.routers.blog-backend.entrypoints=https,web"
+        - "traefik.http.routers.blog-backend.entrypoints=https"
         - "traefik.http.routers.blog-backend.tls.certresolver=letsencrypt"
         - "traefik.http.services.blog-backend.loadbalancer.server.port=6123"
+
+        - "traefik.http.routers.blog-backend-http.rule=Host(`api.xirzo.ru`)"
+        - "traefik.http.routers.blog-backend-http.entrypoints=web"
+        - "traefik.http.routers.blog-backend-http.middlewares=blog-backend-redirect-to-https"
+        - "traefik.http.middlewares.blog-backend-redirect-to-https.redirectscheme.scheme=https"
       
   blog-frontend:
     image: ghcr.io/xirzo/blog-frontend:latest
@@ -33,10 +39,16 @@
     deploy:
       labels:
         - "traefik.enable=true"
+
         - "traefik.http.routers.blog-frontend.rule=Host(`xirzo.ru`)"
-        - "traefik.http.services.blog-frontend.loadbalancer.server.port=80"
-        - "traefik.http.routers.blog-frontend.entrypoints=https,web"
+        - "traefik.http.routers.blog-frontend.entrypoints=https"
         - "traefik.http.routers.blog-frontend.tls.certresolver=letsencrypt"
+        - "traefik.http.services.blog-frontend.loadbalancer.server.port=80"
+
+        - "traefik.http.routers.blog-frontend-http.rule=Host(`xirzo.ru`)"
+        - "traefik.http.routers.blog-frontend-http.entrypoints=web"
+        - "traefik.http.routers.blog-frontend-http.middlewares=blog-frontend-redirect-to-https"
+        - "traefik.http.middlewares.blog-frontend-redirect-to-https.redirectscheme.scheme=https"
 
 networks:
   traefik_proxy:
