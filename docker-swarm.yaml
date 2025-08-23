@@ -6,41 +6,41 @@
       - jwt_key
       - jwt_issuer
       - jwt_audience
-    ports:
-      - "6123:6123"
     environment:
       FRONTEND_ORIGIN: https://xirzo.ru
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
       JWT_KEY: /run/secrets/jwt_key
       JWT_ISSUER: /run/secrets/jwt_issuer 
       JWT_AUDIENCE: /run/secrets/jwt_audience
-    depends_on:
-      - db
     networks:
-      - blog-network
+      - traefik_proxy
     deploy:
-      restart_policy:
-        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.blog-backend.rule=Host(`api.xirzo.ru`)"
+        - "traefik.http.routers.blog-backend.entrypoints=https,web"
+        - "traefik.http.routers.blog-backend.tls.certresolver=letsencrypt"
+        - "traefik.http.services.blog-backend.loadbalancer.server.port=6123"
       
   blog-frontend:
     image: ghcr.io/xirzo/blog-frontend:latest
-    ports:
-      - "3000:80"
     environment:
       - CHOKIDAR_USEPOLLING=true
       - VITE_BACKEND_URL=https://api.xirzo.ru
       - VITE_LOGO_TEXT=Xirzo Blog
-    depends_on:
-      - blog-backend
     networks:
-      - blog-network
+      - traefik_proxy
     deploy:
-      restart_policy:
-        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.blog-frontend.rule=Host(`xirzo.ru`)"
+        - "traefik.http.services.blog-frontend.loadbalancer.server.port=80"
+        - "traefik.http.routers.blog-frontend.entrypoints=https,web"
+        - "traefik.http.routers.blog-frontend.tls.certresolver=letsencrypt"
 
 networks:
-  blog-network:
-    driver: overlay
+  traefik_proxy:
+    external: true
 
 secrets:
   db_connection_string:
