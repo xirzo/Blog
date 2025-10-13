@@ -7,7 +7,7 @@
       - jwt_issuer
       - jwt_audience
     environment:
-      FRONTEND_ORIGIN: https://xirzo.ru
+      FRONTEND_ORIGIN: https://blog.xirzo.ru
       DB_CONNECTION_STRING: /run/secrets/db_connection_string
       JWT_KEY: /run/secrets/jwt_key
       JWT_ISSUER: /run/secrets/jwt_issuer 
@@ -18,12 +18,12 @@
       labels:
         - "traefik.enable=true"
 
-        - "traefik.http.routers.blog-backend.rule=Host(`api.xirzo.ru`)"
+        - "traefik.http.routers.blog-backend.rule=Host(`blog.api.xirzo.ru`)"
         - "traefik.http.routers.blog-backend.entrypoints=https"
         - "traefik.http.routers.blog-backend.tls.certresolver=letsencrypt"
         - "traefik.http.services.blog-backend.loadbalancer.server.port=6123"
 
-        - "traefik.http.routers.blog-backend-http.rule=Host(`api.xirzo.ru`)"
+        - "traefik.http.routers.blog-backend-http.rule=Host(`blog.api.xirzo.ru`)"
         - "traefik.http.routers.blog-backend-http.entrypoints=web"
         - "traefik.http.routers.blog-backend-http.middlewares=blog-backend-redirect-to-https"
         - "traefik.http.middlewares.blog-backend-redirect-to-https.redirectscheme.scheme=https"
@@ -32,7 +32,7 @@
     image: ghcr.io/xirzo/blog-frontend:latest
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - VITE_BACKEND_URL=https://api.xirzo.ru
+      - VITE_BACKEND_URL=https://blog.api.xirzo.ru
       - VITE_LOGO_TEXT=Xirzo Blog
     networks:
       - traefik_proxy
@@ -40,12 +40,12 @@
       labels:
         - "traefik.enable=true"
 
-        - "traefik.http.routers.blog-frontend.rule=Host(`xirzo.ru`)"
+        - "traefik.http.routers.blog-frontend.rule=Host(`blog.xirzo.ru`)"
         - "traefik.http.routers.blog-frontend.entrypoints=https"
         - "traefik.http.routers.blog-frontend.tls.certresolver=letsencrypt"
         - "traefik.http.services.blog-frontend.loadbalancer.server.port=80"
 
-        - "traefik.http.routers.blog-frontend-http.rule=Host(`xirzo.ru`)"
+        - "traefik.http.routers.blog-frontend-http.rule=Host(`blog.xirzo.ru`)"
         - "traefik.http.routers.blog-frontend-http.entrypoints=web"
         - "traefik.http.routers.blog-frontend-http.middlewares=blog-frontend-redirect-to-https"
         - "traefik.http.middlewares.blog-frontend-redirect-to-https.redirectscheme.scheme=https"

@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 WORKDIR /app
 COPY . .
 
-ENV VITE_BACKEND_URL=https://api.xirzo.ru
+ENV VITE_BACKEND_URL=https://blog.api.xirzo.ru
 ENV VITE_LOGO_TEXT="Xirzo Blog"
 
 RUN npm install
