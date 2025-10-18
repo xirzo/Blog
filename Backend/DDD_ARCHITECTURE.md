@@ -24,8 +24,8 @@ Contains the core business logic and domain model:
 
 **Repositories** (`Domain/Repositories/`)
 - Repository interfaces defining data access contracts
-- `IUserRepository.cs`: User data access interface
-- `IPostRepository.cs`: Post data access interface
+- `IUserRepository`: User data access interface
+- `IPostRepository`: Post data access interface
 - Defined in domain layer, implemented in infrastructure
 
 **Domain Constants** (`Domain/`)
@@ -77,10 +77,12 @@ public string Name { get; set; }
 
 // After (Rich): Private setters with validation
 public string Name { get; private set; }
-public void Update(string? name, ...) {
-    if (name != null && string.IsNullOrWhiteSpace(name))
-        throw new ArgumentException("Name cannot be empty");
-    Name = name;
+public void Update(string? name /* ... other parameters */) {
+    if (name != null) {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty");
+        Name = name;
+    }
 }
 ```
 
