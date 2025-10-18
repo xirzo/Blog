@@ -1,5 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using Blog.Core.UseCases;
+using Blog.Core.Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Blog.Web.Autherization;

@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Blog.Core.Entities;
+using Blog.Core.Domain;
 using Blog.Core.Helpers;
-using Blog.Core.Services;
-using Blog.Core.UseCases;
+using Blog.Core.Application.Services;
+using Blog.Core.Domain.Repositories;
 using Blog.IO.Db;
 using Blog.IO.Extensions;
 using Blog.IO.Repositories;

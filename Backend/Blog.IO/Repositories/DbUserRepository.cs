@@ -1,5 +1,5 @@
-using Blog.Core.Entities;
-using Blog.Core.UseCases;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Repositories;
 using Blog.IO.Db;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,7 +27,7 @@ public class DbUserRepository(BlogDbContext context) : IUserRepository
 
     public async Task<User?> FindByEmailAsync(string email)
     {
-        return await context.Users.FirstOrDefaultAsync(user => user.Email == email);
+        return await context.Users.FirstOrDefaultAsync(user => user.Email.Value == email);
     }
     
     public async Task<ICollection<string>?> FindPermissionsById(Guid id)

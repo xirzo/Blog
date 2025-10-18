@@ -1,5 +1,6 @@
-using Blog.Core.Entities;
-using Blog.Core.UseCases;
+using Blog.Core.Domain.Entities;
+using Blog.Core.Domain.Repositories;
+using Blog.Core.Domain;
 using Blog.Web.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,24 +22,23 @@ public class PostsController : ControllerBase
     [Authorize(Policy = Permissions.Create)]
     public async Task<IActionResult> Create([FromBody] BlogCreateDto dto)
     {
-        var blog = new Core.Entities.Post
+        try
         {
-            Id = Guid.NewGuid(),
-            Name = dto.Name,
-            Description = dto.Description,
-            MarkdownContent = dto.MarkdownContent,
-            Created = DateTime.UtcNow,
-            AuthorId = dto.AuthorId,
-        };
-        
-        var created = await _repository.CreateAsync(blog);
+            var blog = Post.Create(dto.Name, dto.Description, dto.MarkdownContent, dto.AuthorId);
+            
+            var created = await _repository.CreateAsync(blog);
 
-        if (created == null)
-        {
-            return NotFound();
+            if (created == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(blog);
         }
-
-        return Ok(blog);
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
     [HttpGet]
@@ -62,14 +62,23 @@ public class PostsController : ControllerBase
     [Authorize(Policy = Permissions.Update)]
     public async Task<IActionResult> UpdateById(Guid id, [FromBody] BlogUpdateDto dto)
     {
-        var blog =  await _repository.UpdateAsync(id, dto.Name, dto.Description, dto.MarkdownContent);
+        var blog = await _repository.GetByIdAsync(id);
 
         if (blog == null)
         {
             return NotFound();
         }
 
-        return Ok(blog);
+        try
+        {
+            blog.Update(dto.Name, dto.Description, dto.MarkdownContent);
+            await _repository.UpdateAsync(blog);
+            return Ok(blog);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
     
     [HttpDelete("{id:guid}")]
