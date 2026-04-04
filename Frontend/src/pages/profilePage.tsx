@@ -20,7 +20,7 @@ function ProfilePage() {
                 console.error("No user");
                 return;
             }
-            const postsData = await getPostsByUser(user.id);
+            const postsData = await getPostsByUser(user.userId);
             setPosts(postsData);
         } catch (err) {
             console.log(err);
@@ -52,11 +52,11 @@ function ProfilePage() {
             <div className={"gap-5 flex flex-col mb-5"}>
                 {posts.length > 0 ? (
                     posts.map((post) => (
-                        <div key={post.id.toString()}
+                        <div key={post.postId.toString()}
                             className={"flex flex-row text-start items-center gap-4"}>
                             <h1>{post.name}</h1>
-                            <Button onClick={() => navigate(`/post/edit/${post.id.toString()}`)}>Edit</Button>
-                            <Button onClick={() => handleDeletion(post.id)}>Delete</Button>
+                            <Button onClick={() => navigate(`/post/edit/${post.postId.toString()}`)}>Edit</Button>
+                            <Button onClick={() => handleDeletion(post.postId)}>Delete</Button>
                         </div>
                     ))
                 ) : (
@@ -69,7 +69,7 @@ function ProfilePage() {
                     <div className="profile-info">
                         <h2>{user.name}</h2>
                         <p className="email">{user.email}</p>
-                        <p className="user-id">ID: {user.id.toString()}</p>
+                        <p className="user-id">ID: {user.userId.toString()}</p>
                     </div>
                 </div>
             )}

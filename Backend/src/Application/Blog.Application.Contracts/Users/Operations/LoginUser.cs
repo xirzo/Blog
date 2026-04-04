@@ -1,3 +1,5 @@
+using Blog.Application.Contracts.Users.Models;
+
 namespace Blog.Application.Contracts.Users.Operations;
 
 public static class LoginUser
@@ -8,7 +10,7 @@ public static class LoginUser
     {
         private Response() { }
 
-        public sealed record Success(string Token) : Response;
+        public sealed record Success(string Token, UserDto User) : Response;
 
         public sealed record WrongPassword(string Message) : Response;
 

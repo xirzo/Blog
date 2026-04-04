@@ -78,6 +78,28 @@ public class PostService : IPostService
         return new UpdatePost.Response.Success(MapToDto(savedPost));
     }
 
+    public async IAsyncEnumerable<PostDto> GetByUserIdAsync(Guid userId, [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        await foreach (Post post in _context.PostRepository.GetAllByUserIdAsync(userId, cancellationToken))
+        {
+            yield return MapToDto(post);
+        }
+    }
+
+    public async Task<DeletePost.Response> DeletePostAsync(DeletePost.Request request, CancellationToken cancellationToken)
+    {
+        Post? post = await _context.PostRepository.FindByPostIdAsync(request.PostId, cancellationToken);
+
+        if (post is null)
+        {
+            return new DeletePost.Response.PostNotFound();
+        }
+
+        await _context.PostRepository.DeleteAsync(post, cancellationToken);
+
+        return new DeletePost.Response.Success(MapToDto(post));
+    }
+
     private static PostDto MapToDto(Post post)
     {
         return new PostDto(post.PostId, post.Name, post.Description, post.MarkdownContent, post.Created, post.AuthorId);

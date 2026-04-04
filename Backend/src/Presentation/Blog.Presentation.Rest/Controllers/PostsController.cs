@@ -40,11 +40,15 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromQuery] Guid? userId, CancellationToken cancellationToken)
     {
         var posts = new List<PostDto>();
 
-        await foreach (PostDto post in _postService.GetAllAsync(cancellationToken))
+        IAsyncEnumerable<PostDto> postsQuery = userId.HasValue
+            ? _postService.GetByUserIdAsync(userId.Value, cancellationToken)
+            : _postService.GetAllAsync(cancellationToken);
+
+        await foreach (PostDto post in postsQuery)
         {
             posts.Add(post);
         }
@@ -77,6 +81,22 @@ public class PostsController : ControllerBase
             UpdatePost.Response.Success success => Ok(success.Post),
             UpdatePost.Response.AuthorNotFound notFound => NotFound(new { message = notFound.Message }),
             UpdatePost.Response.PostRepositoryError error => BadRequest(new { message = error.Message }),
+            _ => BadRequest(),
+        };
+    }
+
+    [HttpDelete("{id:guid}")]
+    [Authorize(Policy = BlogPermissions.Delete)]
+    public async Task<IActionResult> DeleteById(Guid id, CancellationToken cancellationToken)
+    {
+        var request = new DeletePost.Request(id);
+        DeletePost.Response result = await _postService.DeletePostAsync(request, cancellationToken);
+
+        return result switch
+        {
+            DeletePost.Response.Success success => Ok(success.Post),
+            DeletePost.Response.PostNotFound => NotFound(),
+            DeletePost.Response.PostRepositoryError error => BadRequest(new { message = error.Message }),
             _ => BadRequest(),
         };
     }

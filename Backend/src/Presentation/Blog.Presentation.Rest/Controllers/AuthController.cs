@@ -29,7 +29,10 @@ public class AuthController : ControllerBase
         return result switch
         {
             RegisterUser.Response.Success success => Ok(new
-                { success.User.UserId, success.User.Name, success.User.Email, }),
+            {
+                success.Token,
+                User = new { success.User.UserId, success.User.Name, success.User.Email },
+            }),
             RegisterUser.Response.UserAlreadyExists userAlreadyExists => Conflict(new
                 { message = userAlreadyExists.Message, }),
             RegisterUser.Response.UserRepositoryError userRepositoryError => BadRequest(new
@@ -46,7 +49,11 @@ public class AuthController : ControllerBase
 
         return result switch
         {
-            LoginUser.Response.Success success => Ok(new { success.Token }),
+            LoginUser.Response.Success success => Ok(new
+            {
+                success.Token,
+                User = new { success.User.UserId, success.User.Name, success.User.Email },
+            }),
             LoginUser.Response.UserNotFound userNotFound => NotFound(new { message = userNotFound.Message }),
             LoginUser.Response.WrongPassword wrongPassword => Unauthorized(new { message = wrongPassword.Message }),
             _ => BadRequest(),

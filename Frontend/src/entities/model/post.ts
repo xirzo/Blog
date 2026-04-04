@@ -2,7 +2,7 @@ import type {Guid} from "guid-typescript";
 import type {User} from "./user.ts";
 
 export type Post = {
-    id: Guid;
+    postId: Guid;
     name: string;
     description: string;
     markdownContent: string;

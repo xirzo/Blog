@@ -41,7 +41,9 @@ public class UserService : IUserService
 
         User addedUser = await _context.UserRepository.AddAsync(user, cancellationToken);
 
-        return new RegisterUser.Response.Success(new UserDto(addedUser.UserId, addedUser.Email, addedUser.Name));
+        string token = _jwtHelper.GenerateJwtToken(addedUser);
+
+        return new RegisterUser.Response.Success(new UserDto(addedUser.UserId, addedUser.Email, addedUser.Name), token);
     }
 
     public async Task<LoginUser.Response> LoginAsync(LoginUser.Request request, CancellationToken cancellationToken)
@@ -60,6 +62,6 @@ public class UserService : IUserService
 
         string token = _jwtHelper.GenerateJwtToken(user);
 
-        return new LoginUser.Response.Success(token);
+        return new LoginUser.Response.Success(token, new UserDto(user.UserId, user.Email, user.Name));
     }
 }

@@ -10,7 +10,7 @@ public static class RegisterUser
     {
         private Response() { }
 
-        public sealed record Success(UserDto User) : Response;
+        public sealed record Success(UserDto User, string Token) : Response;
 
         public sealed record UserAlreadyExists(string Message) : Response;
 

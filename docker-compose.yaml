@@ -4,9 +4,9 @@
     image: blog-backend
     build:
       context: ./Backend
-      dockerfile: Blog.Web/Dockerfile.dev
+      dockerfile: src/Blog/Dockerfile
     env_file:
-      - ./Backend/.env
+      - ./backend.env
     ports:
       - "6123:6123"
     depends_on:
@@ -29,7 +29,7 @@
     depends_on:
       - blog-backend
     env_file:
-      - ./Frontend/.env
+      - ./frontend.env
     networks:
       - blog-network
 

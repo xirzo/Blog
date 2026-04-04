@@ -51,7 +51,7 @@ function PostEditPage() {
         setSaveError(null);
 
         try {
-            await updatePost(post.id, {
+            await updatePost(post.postId, {
                 name,
                 description,
                 markdownContent

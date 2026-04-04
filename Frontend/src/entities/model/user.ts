@@ -1,7 +1,7 @@
 import type { Guid } from "guid-typescript";
 
 export type User =  {
-    id: Guid;
+    userId: Guid;
     email: string;
     name: string;
 }

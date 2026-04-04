@@ -39,12 +39,12 @@ function PostsPage() {
             {posts.length > 0 ? (
                 posts.map((post) => (
                     <PostMiniature
-                        key={post.id.toString()}
-                        blodId={post.id.toString()}
+                        key={post.postId.toString()}
+                        blodId={post.postId.toString()}
                         name={post.name}
                         description={post.description}
                         date={post.created}
-                        linkTo={`/post/${post.id}`}
+                        linkTo={`/post/${post.postId}`}
                         maxWordsInDescription={maxWordsInDescription}
                     />
                 ))

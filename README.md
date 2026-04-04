@@ -2,30 +2,27 @@
 
 <img width="2538" height="1283" alt="blog_preview" src="https://github.com/user-attachments/assets/b3d5332c-5926-4d39-a948-f59499b7e6c6" />
 
-## Installation (for development)
-### Copy env files and **put values in them**
+## Installation
 
-```sh
-cp backend.env Backend/.env
-cp frontend.env Frontend/.env
-```
+### Configure env files
+
+Edit `backend.env` and `frontend.env` in the repo root with your values.
 
 ### Start the docker compose
 
 ```sh
-docker-compose build
-docker-compose up -d
+docker compose build
+docker compose up -d
 ```
-
 
 ## Deploy on server
 
 >[!WARNING]
-> When building frontend image for production, set ENVs inside of the Dockerfile.
+> Vite bakes `VITE_*` variables at **build time**. Set them inside `Frontend/Dockerfile` before building the production image.
 
-Create context to execute **Docker** commands as if you were on VPS.
+Create a context to execute **Docker** commands against your VPS.
 ```sh
-docker context create blog --host=ssh;://<username>@<ip>
+docker context create blog --host=ssh://<username>@<ip>
 ```
 
 Use that context.
@@ -39,11 +36,14 @@ docker swarm init
 
 Add secrets
 ```sh
-echo "PUT_STRING_HERE" | docker secret create DB_CONNECTION_STRING -
+echo "PUT_STRING_HERE" | docker secret create db_connection_string -
+echo "PUT_STRING_HERE" | docker secret create jwt_key -
+echo "PUT_STRING_HERE" | docker secret create jwt_issuer -
+echo "PUT_STRING_HERE" | docker secret create jwt_audience -
 ```
 
 Deploy to the VPS
 
 ```sh
-docker stack deploy blog -c docker-stack.yaml --with-registry-auth
+docker stack deploy blog -c docker-swarm.yaml --with-registry-auth
 ```

@@ -15,5 +15,9 @@ public interface IPostService
 
     Task<PostDto?> FindByPostId(Guid postId, CancellationToken cancellationToken);
 
+    IAsyncEnumerable<PostDto> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken);
+
     Task<UpdatePost.Response> UpdatePostAsync(UpdatePost.Request request, CancellationToken cancellationToken);
+
+    Task<DeletePost.Response> DeletePostAsync(DeletePost.Request request, CancellationToken cancellationToken);
 }

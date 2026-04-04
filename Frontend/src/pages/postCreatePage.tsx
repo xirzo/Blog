@@ -26,7 +26,7 @@ function PostCreatePage() {
                 name,
                 description,
                 markdownContent,
-                authorId: authContext.user.id
+                authorId: authContext.user.userId
             });
             setName("");
             setDescription("");
