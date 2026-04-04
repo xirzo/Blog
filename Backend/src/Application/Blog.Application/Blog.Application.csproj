@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Blog.Application.Abstractions\Blog.Application.Abstractions.csproj"/>
+        <ProjectReference Include="..\Blog.Application.Contracts\Blog.Application.Contracts.csproj"/>
+    </ItemGroup>
+
+</Project>
