@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <ItemGroup>
+        <ProjectReference Include="..\Application\Blog.Application\Blog.Application.csproj" />
+        <ProjectReference Include="..\Infrastructure\Blog.Infrastructure.Efcore\Blog.Infrastructure.Efcore.csproj" />
+        <ProjectReference Include="..\Presentation\Blog.Presentation.Rest\Blog.Presentation.Rest.csproj" />
+    </ItemGroup>
+
+</Project>

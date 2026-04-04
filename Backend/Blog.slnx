@@ -1,0 +1,27 @@
+<Solution>
+    <Folder Name="/common/">
+        <File Path=".editorconfig" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Packages.props" />
+    </Folder>
+    
+    <Folder Name="/src/">
+        <Project Path="src/Blog/Blog.csproj" />
+    </Folder>
+
+    <Folder Name="/src/Application/">
+        <Project Path="src/Application/Blog.Application.Abstractions/Blog.Application.Abstractions.csproj" />
+        <Project Path="src/Application/Blog.Application.Contracts/Blog.Application.Contracts.csproj" />
+        <Project Path="src\Application\Blog.Application.Models\Blog.Application.Models.csproj" />
+        <Project Path="src\Application\Blog.Application\Blog.Application.csproj" />
+    </Folder>
+
+    <Folder Name="/src/Infrastructure/">
+        <Project Path="src\Infrastructure\Blog.Infrastructure.Efcore\Blog.Infrastructure.Efcore.csproj" />
+    </Folder>
+
+
+    <Folder Name="/src/Presentation/">
+        <Project Path="src\Presentation\Blog.Presentation.Rest\Blog.Presentation.Rest.csproj" />
+    </Folder>
+</Solution>
